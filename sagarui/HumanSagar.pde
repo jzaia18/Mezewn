@@ -1,14 +1,14 @@
-class sagar {
+class HumanSagar extends Sagar {
 
   float x, y, rad;
   color c;
 
-  sagar() {
+  HumanSagar() {
     float r = random(256);
     float g = random(256);
     float b = random(256);
     c = color(r, g, b);
-    rad = 10;
+    rad = 100;
     x = random((width - r) + r/2);
     y = random((height - r) + r/2);
   }

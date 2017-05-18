@@ -1,10 +1,8 @@
-import java.util.ArrayList;
-
-ArrayList<sagar> sagars = new ArrayList<sagar>();
+ArrayList<Sagar> sagars = new ArrayList<Sagar>();
 
 void setup() {
   fullScreen();
-  sagars.add(new sagar());
+  sagars.add(new HumanSagar());
 }
 
 void draw() {
