@@ -1,8 +1,8 @@
-ArrayList<Sagar> sagars = new ArrayList<Sagar>();
+ArrayList<Ball> sagars = new ArrayList<Ball>();
 
 void setup() {
   fullScreen();
-  sagars.add(new HumanSagar());
+  sagars.add(new Ball());
 }
 
 void draw() {
