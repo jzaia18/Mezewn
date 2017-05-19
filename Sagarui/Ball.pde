@@ -15,7 +15,7 @@ class Ball implements Comparable{
     y = random((height - r) + r/2);
   }
   
-  int compareTo(Object o){
+  public int compareTo(Object o){
     if (!(o instanceof Ball)){
       throw new ClassCastException();
     }
@@ -32,7 +32,10 @@ class Ball implements Comparable{
     y += dy * .06 * (10 / rad);
   }
   
-  
+  boolean die(){
+    while (rad > 0) rad -= 1;
+    return true;
+  }
 
   void display() {
     fill(c);
