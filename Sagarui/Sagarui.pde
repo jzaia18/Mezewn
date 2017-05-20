@@ -17,6 +17,7 @@ void draw() {
   spawnMass();
   ballConsumption();
   massConsumption();
+  deadSagarRemoval();
 }
 
 
@@ -57,9 +58,5 @@ void deadSagarRemoval() {
 
 void spawnMass() {
   if (mass.size() > 1000) return;
-  for (Sagar s : sagars) {
-    for (Ball b : s.balls) {
-      if (random(100) < 1) mass.add(new Mass(this, b));
-    }
-  }
+  if (random(100) < 10) mass.add(new Mass(this));
 }

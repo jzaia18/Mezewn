@@ -13,12 +13,6 @@ class Mass {
     exists = true;
   }
 
-  Mass(Sagarui sg, Ball b) {
-    this(sg);
-    x = b.x + (-30 + random(30));
-    y = b.y + (-30 + random(30));
-  }
-
   void display() {
     fill(128);
     noStroke();
