@@ -1,45 +1,39 @@
-class Ball implements Comparable{
-  
-  float x, y, rad;
-  color c;
-  int mass;
+abstract class Ball implements Comparable {
 
-  Ball() {
-    float r = random(256);
-    float g = random(256);
-    float b = random(256);
-    c = color(r, g, b);
-    rad = 10;
-    mass = 5;
-    x = random((width - r) + r/2);
-    y = random((height - r) + r/2);
-  }
-  
-  public int compareTo(Object o){
-    if (!(o instanceof Ball)){
+  float x, y, rad;
+  color _col;
+  int _mass;
+  Sagar parent;
+  Sagarui game;
+
+  public int compareTo(Object o) {
+    if (!(o instanceof Ball)) {
       throw new ClassCastException();
     }
     Ball b = (Ball)o;
-    return mass - b.mass;
+    return _mass - b._mass;
   }
 
-  void move() {
-
-    float dx = mouseX - x;
-    x += dx * .06 * (10 / rad);
-
-    float dy = mouseY - y;
-    y += dy * .06 * (10 / rad);
+  void consume(Ball b) {
+    if (compareTo(b) > 1 && dist(x, y, b.x, b.y) <= rad) {
+      _mass += b._mass;
+      b.parent.balls.remove(b);
+    }
   }
-  
-  boolean die(){
-    while (rad > 0) rad -= 1;
-    return true;
+
+  void consume(Mass m) {
+     if (dist(x, y, m.x, m.y) <= rad) {
+        _mass += m._mass;
+        m.exists = false;
+     }
   }
+
+  abstract void move();
 
   void display() {
-    fill(c);
+    rad = _mass/2;
+    fill(_col);
+    noStroke();
     ellipse (x, y, 2*rad, 2*rad);
   }
-  
 }
