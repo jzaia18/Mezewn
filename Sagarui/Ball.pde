@@ -30,7 +30,7 @@ abstract class Ball implements Comparable {
   abstract void move();
 
   void display() {
-    rad = _mass/2;
+    rad = 5 + (sqrt(_mass)/2);
     fill(_col);
     noStroke();
     ellipse (x, y, 2*rad, 2*rad);

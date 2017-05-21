@@ -2,7 +2,7 @@ class HumanSagar extends Sagar {
 
   HumanSagar() {
     _balls = new PriorityQueue<Ball>();
-    _balls.add(new HumanBall(this, 20));
+    _balls.add(new HumanBall(this, 10));
   }
 
   void split() {
