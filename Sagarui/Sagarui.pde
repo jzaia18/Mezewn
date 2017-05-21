@@ -4,7 +4,7 @@ ArrayList<Mass> mass = new ArrayList<Mass>();
 
 void setup() {
   fullScreen();
-  sagars.add(new HumanSagar(this));
+  sagars.add(new HumanSagar());
   for (int i=0; i<250; i++) mass.add(new Mass(this));
   for (int i=0; i<25; i++) sagars.add(new AISagar(this));
 }
@@ -25,8 +25,8 @@ void ballConsumption() {
   for (Sagar s1 : sagars) {
     for (Sagar s2 : sagars) {
       if (s1 != s2) {
-        for (Ball b1 : s1.balls) {
-          for (Ball b2 : s2.balls) {
+        for (Ball b1 : s1._balls) {
+          for (Ball b2 : s2._balls) {
             b1.consume(b2);
           }
         }
@@ -41,7 +41,7 @@ void massConsumption() {
     Mass m = (Mass) it.next();
     if (!m.exists) it.remove(); 
     for (Sagar s : sagars) {
-      for (Ball b : s.balls) {
+      for (Ball b : s._balls) {
         b.consume(m);
       }
     }
@@ -52,7 +52,7 @@ void deadSagarRemoval() {
   Iterator it = sagars.iterator();
   while (it.hasNext()) {
     Sagar s = (Sagar) it.next();
-    if (s.balls.size() == 0) it.remove();
+    if (s._balls.size() == 0) it.remove();
   }
 }
 

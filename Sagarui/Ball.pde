@@ -4,7 +4,6 @@ abstract class Ball implements Comparable {
   color _col;
   int _mass;
   Sagar parent;
-  Sagarui game;
 
   public int compareTo(Object o) {
     if (!(o instanceof Ball)) {
@@ -17,7 +16,7 @@ abstract class Ball implements Comparable {
   void consume(Ball b) {
     if (compareTo(b) > 1 && dist(x, y, b.x, b.y) <= rad) {
       _mass += b._mass;
-      b.parent.balls.remove(b);
+      b.parent._balls.remove(b);
     }
   }
 
@@ -35,5 +34,9 @@ abstract class Ball implements Comparable {
     fill(_col);
     noStroke();
     ellipse (x, y, 2*rad, 2*rad);
+  }
+  
+  int getMass(){
+     return _mass; 
   }
 }

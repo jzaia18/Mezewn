@@ -1,6 +1,6 @@
 class AIBall extends Ball {
 
-  AIBall(Sagarui sg, Sagar s) {
+  AIBall(Sagar s) {
     float r = random(256);
     float g = random(256);
     float b = random(256);
@@ -9,16 +9,15 @@ class AIBall extends Ball {
     x = random((width - r) + r/2);
     y = random((height - r) + r/2);
     parent = s;
-    game = sg;
   }
 
-  AIBall(Sagarui sg, Sagar s, int mass) {
-    this(sg, s);
+  AIBall(Sagar s, int mass) {
+    this(s);
     _mass = mass;
   }
 
-  AIBall(Sagarui sg, Sagar s, int mass, float xcor, float ycor) {
-    this(sg, s, mass);
+  AIBall(Sagar s, int mass, float xcor, float ycor) {
+    this(s, mass);
     x = xcor;
     y = ycor;
   }
