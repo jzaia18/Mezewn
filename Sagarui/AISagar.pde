@@ -1,6 +1,6 @@
 class AISagar extends Sagar {
 
-  AISagar(Sagarui s) {
+  AISagar() {
     _balls = new PriorityQueue<Ball>();
     _balls.add(new AIBall(this, 10));
   }

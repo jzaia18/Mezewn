@@ -3,13 +3,16 @@ class Mass {
   float x, y, col;
   int _mass;
   boolean exists;
-  Sagarui game;    
+  color _col;
 
-  Mass(Sagarui sg) {
-    _mass = (int) random(5);
+  Mass() {
+    float r = random(256);
+    float g = random(256);
+    float b = random(256);
+    _col = color(r, g, b);
+    _mass = (int) random(3) + 1;
     x = random(width);
     y = random(height);
-    game = sg;
     exists = true;
   }
 

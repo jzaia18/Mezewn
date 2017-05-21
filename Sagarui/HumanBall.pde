@@ -8,7 +8,7 @@ class HumanBall extends Ball {
     _mass = 10000000;
     x = random((width - r) + r/2);
     y = random((height - r) + r/2);
-    parent = s;
+    _parent = s;
   }
 
   HumanBall(Sagar s, int mass) {
@@ -23,7 +23,7 @@ class HumanBall extends Ball {
   }
 
   void move() {
-    x += (mouseX - x) * (.6 / (_mass/2.5));
-    y += (mouseY - y) * (.6 / (_mass/2.5));
+    x += (mouseX - x) * (5.0 / _mass);
+    y += (mouseY - y) * (5.0 / _mass);
   }
 }

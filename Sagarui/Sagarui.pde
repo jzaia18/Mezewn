@@ -5,8 +5,8 @@ ArrayList<Mass> mass = new ArrayList<Mass>();
 void setup() {
   fullScreen();
   sagars.add(new HumanSagar());
-  for (int i=0; i<250; i++) mass.add(new Mass(this));
-  for (int i=0; i<25; i++) sagars.add(new AISagar(this));
+  for (int i=0; i<250; i++) mass.add(new Mass());
+  for (int i=0; i<25; i++) sagars.add(new AISagar());
 }
 
 
@@ -57,6 +57,6 @@ void deadSagarRemoval() {
 }
 
 void spawnMass() {
-  if (mass.size() > 1000) return;
-  if (random(100) < 10) mass.add(new Mass(this));
+  if (mass.size() > 500) return;
+  if (random(100) < 5) mass.add(new Mass());
 }

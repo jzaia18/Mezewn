@@ -8,7 +8,7 @@ class AIBall extends Ball {
     _mass = 100;
     x = random((width - r) + r/2);
     y = random((height - r) + r/2);
-    parent = s;
+    _parent = s;
   }
 
   AIBall(Sagar s, int mass) {
