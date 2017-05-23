@@ -5,7 +5,7 @@ class HumanBall extends Ball {
     float g = random(256);
     float b = random(256);
     _col = color(r, g, b);
-    _mass = 10000000;
+    _mass = 10;
     x = random((width - r) + r/2);
     y = random((height - r) + r/2);
     _parent = s;
@@ -21,9 +21,14 @@ class HumanBall extends Ball {
     x = xcor;
     y = ycor;
   }
+  
+  float getDistFrom(float ox, float oy){
+     return dist(x, y, ox, oy); 
+  }
 
   void move() {
-    x += (mouseX - x) * (5.0 / _mass);
-    y += (mouseY - y) * (5.0 / _mass);
+    float speed = max(.002, (.1 - (.001 * (_mass / 4.0)))); //As a decimal (0, 1] representing percent of mouse gap moved
+    x += (mouseX - x) * speed;
+    y += (mouseY - y) * speed;
   }
 }

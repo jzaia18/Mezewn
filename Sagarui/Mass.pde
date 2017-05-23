@@ -10,7 +10,7 @@ class Mass {
     float g = random(256);
     float b = random(256);
     _col = color(r, g, b);
-    _mass = (int) random(3) + 1;
+    _mass = (int) random(2) + 1;
     x = random(width);
     y = random(height);
     exists = true;

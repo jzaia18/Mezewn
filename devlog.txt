@@ -64,3 +64,19 @@ Adeebur Rahman : Revised proposal once again
 Michael Ruvinshteyn : Made edits to core functionality files
 Jake Zaia : Published devlog and plan
 ==============================================================
+
+2017-05-20
+--------------------------------------------------------------
+All: 
+Adeebur Rahman : Added more functionality to Ball & Sagar
+Michael Ruvinshteyn : 
+Jake Zaia : Finished UML for Sagarui
+==============================================================
+
+2017-05-22
+--------------------------------------------------------------
+All: Revised plans once again
+Adeebur Rahman : Updated UML
+Michael Ruvinshteyn : Minor edits
+Jake Zaia : Incorperated AI movement (is still very buggy)
+==============================================================

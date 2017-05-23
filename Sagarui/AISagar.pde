@@ -1,5 +1,5 @@
 class AISagar extends Sagar {
-
+  
   AISagar() {
     _balls = new PriorityQueue<Ball>();
     _balls.add(new AIBall(this, 10));
@@ -15,4 +15,9 @@ class AISagar extends Sagar {
     }
     _balls = tmp;
   }
+  
+  void targetClosest(ArrayList<Sagar> s){
+    _balls.peek().targetClosest(s);
+  }
+  
 }

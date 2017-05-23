@@ -14,7 +14,7 @@ abstract class Ball implements Comparable {
   }
 
   void consume(Ball b) {
-    if (compareTo(b) > 1 && dist(x, y, b.x, b.y) <= rad) {
+    if (compareTo(b) > (_mass * .8) && dist(x, y, b.x, b.y) <= rad) {
       _mass += b._mass;
       b._parent._balls.remove(b);
     }
@@ -30,7 +30,7 @@ abstract class Ball implements Comparable {
   abstract void move();
 
   void display() {
-    rad = 5 + (sqrt(_mass)/2);
+    rad = 7 + (sqrt(_mass)/2);
     fill(_col);
     noStroke();
     ellipse (x, y, 2*rad, 2*rad);
@@ -43,4 +43,10 @@ abstract class Ball implements Comparable {
   Sagar getParent(){
      return _parent; 
   }
+  
+  float getDistFrom(float dx, float dy){
+   return dist(x, y, dx, dy); 
+  }
+  
+  void targetClosest(ArrayList<Sagar> s){}
 }

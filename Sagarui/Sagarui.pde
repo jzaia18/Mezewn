@@ -22,17 +22,12 @@ void draw() {
 
 
 void ballConsumption() {
-  for (Sagar s1 : sagars) {
-    for (Sagar s2 : sagars) {
-      if (s1 != s2) {
-        for (Ball b1 : s1._balls) {
-          for (Ball b2 : s2._balls) {
+  for (Sagar s1 : sagars)
+    for (Sagar s2 : sagars)
+      if (s1 != s2)
+        for (Ball b1 : s1._balls)
+          for (Ball b2 : s2._balls)
             b1.consume(b2);
-          }
-        }
-      }
-    }
-  }
 }
 
 void massConsumption() { 
