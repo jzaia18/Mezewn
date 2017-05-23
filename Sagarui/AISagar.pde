@@ -19,5 +19,4 @@ class AISagar extends Sagar {
   void targetClosest(ArrayList<Sagar> s){
     _balls.peek().targetClosest(s);
   }
-  
 }

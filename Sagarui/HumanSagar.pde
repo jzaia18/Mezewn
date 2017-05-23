@@ -6,13 +6,13 @@ class HumanSagar extends Sagar {
   }
 
   void split() {
-    PriorityQueue<Ball> tmp = new PriorityQueue<Ball>();
-    for (Ball b : _balls) {
-      if (b._mass > 50) {
-        tmp.add(new HumanBall(this, b._mass/2, b.x+50, b.y+50)); // fix placement
-        tmp.add(new HumanBall(this, b._mass/2, b.x-50, b.y-50));
-      } else tmp.add(b);
+    if (_balls.size() < 8 && _totalMass >= 50) {
+      PriorityQueue<Ball> tmp = new PriorityQueue<Ball>();
+      for (Ball b : _balls) {
+        tmp.add(new HumanBall(this, b._mass / 2, b.x + b.rad, b.y + b.rad));
+        tmp.add(new HumanBall(this, b._mass / 2, b.x, b.y));
+      }
+      _balls = tmp;
     }
-    _balls = tmp;
   }
 }

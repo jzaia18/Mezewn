@@ -5,9 +5,9 @@ class AIBall extends Ball {
   float dy;
 
   AIBall(Sagar s) {
-    float r = random(256);
-    float g = random(256);
-    float b = random(256);
+    float r = random(50,256);
+    float g = random(50,256);
+    float b = random(50,256);
     _col = color(r, g, b);
     _mass = (int) random(41) + 10;
     dx = random(30) - 15;
