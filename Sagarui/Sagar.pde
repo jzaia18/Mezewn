@@ -25,7 +25,10 @@ abstract class Sagar {
     move();
     display();
     calcMass();
+    split();
   }
+
+  void split(){}
 
   void targetClosest(){}
 
