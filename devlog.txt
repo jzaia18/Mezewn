@@ -69,7 +69,6 @@ Jake Zaia : Published devlog and plan
 --------------------------------------------------------------
 All: 
 Adeebur Rahman : Added more functionality to Ball & Sagar
-Michael Ruvinshteyn : 
 Jake Zaia : Finished UML for Sagarui
 ==============================================================
 
@@ -77,6 +76,6 @@ Jake Zaia : Finished UML for Sagarui
 --------------------------------------------------------------
 All: Revised plans once again
 Adeebur Rahman : Updated UML
-Michael Ruvinshteyn : Minor edits
-Jake Zaia : Incorperated AI movement (is still very buggy)
+Michael Ruvinshteyn : Minor edits; Helped Jake implement AI movement
+Jake Zaia : Incorporated AI movement (is still very buggy)
 ==============================================================
