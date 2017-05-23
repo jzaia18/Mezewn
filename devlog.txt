@@ -76,6 +76,6 @@ Jake Zaia : Finished UML for Sagarui
 --------------------------------------------------------------
 All: Revised plans once again
 Adeebur Rahman : Updated UML
-Michael Ruvinshteyn : Minor edits; Helped Jake implement AI movement
+Michael Ruvinshteyn : Minor edits; Helped Jake implement AI movement; Added plan/20170523
 Jake Zaia : Incorporated AI movement (is still very buggy)
 ==============================================================

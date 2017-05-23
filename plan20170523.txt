@@ -1,0 +1,28 @@
+Team Mezewn
+Michael Ruvinshteyn
+Adeebur Rahman
+Jake Zaia
+pd 01
+
+plan/20170523:
+
+SAGAR.UI currently has:
+-player movement
+-player/food consumption
+-food spawning
+
+SAGAR.UI still requires:
+-AI movement
+-splitting/merging of both player and AI
+	-player splitting to be implemented first for the purpose of MVP
+	-AI splitting to be implemented post-MVP, maybe only for certain difficulties (?)
+
+Future updates:
+-screen control (one of two methods)
+	-center the ball and move the surroundings in accordance to the ball
+	-fog out the entire screen except the small area that the ball is in (field of view)
+-implement other UI games
+	-snek
+	-chrench
+	-mar
+	-war
