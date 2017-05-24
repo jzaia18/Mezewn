@@ -51,31 +51,39 @@ LESSONS LEARNED
 ==============================================================
 2017-05-17
 --------------------------------------------------------------
-All : Created proposal, discussed plans for future development
-Adeebur Rahman : Revised proposal, expanded upon ideas
-Michael Ruvinshteyn : Started setting up repository for work
-Jake Zaia : Began work on core parts of proposal
+All: Created proposal, discussed plans for future development
+Adeebur Rahman: Revised proposal, expanded upon ideas
+Michael Ruvinshteyn: Started setting up repository for work
+Jake Zaia: Began work on core parts of proposal
 ==============================================================
 
 2017-05-18
 --------------------------------------------------------------
 All: Revised plans to fit immediate goals, started on MVP
-Adeebur Rahman : Revised proposal once again
-Michael Ruvinshteyn : Made edits to core functionality files
-Jake Zaia : Published devlog and plan
+Adeebur Rahman: Revised proposal once again
+Michael Ruvinshteyn: Made edits to core functionality files
+Jake Zaia: Published devlog and plan
 ==============================================================
 
 2017-05-20
 --------------------------------------------------------------
-All: 
-Adeebur Rahman : Added more functionality to Ball & Sagar
-Jake Zaia : Finished UML for Sagarui
+Adeebur Rahman: Added more functionality to Ball & Sagar
+Jake Zaia: Finished UML for Sagarui
 ==============================================================
 
 2017-05-22
 --------------------------------------------------------------
 All: Revised plans once again
-Adeebur Rahman : Updated UML
-Michael Ruvinshteyn : Minor edits; Helped Jake implement AI movement; Added plan/20170523
-Jake Zaia : Incorporated AI movement (is still very buggy)
+Adeebur Rahman: Updated UML
+Michael Ruvinshteyn: Minor edits; Helped Jake implement AI 
+	movement; Added plan/20170523
+Jake Zaia: Incorporated AI movement (is still very buggy)
+==============================================================
+
+2017-05-22
+--------------------------------------------------------------
+All: Came up with draft for UML, flowchart, plan for AI
+Adeebur Rahman: Started fixing AI, worked on splitting
+Michael Ruvinshteyn: Started fixing AI, worked on splitting
+Jake Zaia: Typed up UMLs and flowchart
 ==============================================================
