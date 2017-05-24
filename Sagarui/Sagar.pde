@@ -6,6 +6,7 @@ abstract class Sagar {
   long _lastSplitTime;
   int _totalMass;
   Sagar _target;
+  boolean space;
 
   void move() {
     for (Ball b : _balls) b.move();
@@ -20,12 +21,21 @@ abstract class Sagar {
     for (Ball b: _balls) _totalMass += b.getMass();
   }
   
+  void pressed() {
+    if (key == ' ') 
+      space = true;
+  }
+
+  void released() {
+    if (key == ' ') 
+      space = false;
+  }
+  
   void update() {
     targetClosest();
     move();
     display();
     calcMass();
-    split();
   }
 
   void split(){}
