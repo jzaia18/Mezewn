@@ -20,6 +20,11 @@ void draw() {
   deadSagarRemoval();
 }
 
+// For user splitting
+void keyPressed() { 
+  if (key == ' ')
+  sagars.get(0).willSplit = true;
+}
 
 void ballConsumption() {
   for (Sagar s1 : sagars)

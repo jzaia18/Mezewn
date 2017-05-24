@@ -9,7 +9,7 @@ class HumanSagar extends Sagar {
 
   void split() {
     if (_balls.size() < 8 && _totalMass >= 50 && System.currentTimeMillis() - _lastSplitTime >= 5000) {
-      space = false;
+      willSplit = false;
       PriorityQueue<Ball> tmp = new PriorityQueue<Ball>();
       for (Ball b : _balls) {
         tmp.add(new HumanBall(this, b._mass / 2, b.x + b.rad, b.y + b.rad));
