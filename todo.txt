@@ -42,10 +42,10 @@ Table of Contents
 /_/            /____/\__,_/\__, /\__,_/_/   \__,_/_/   
                           /____/ 
 ==============================================
-  0. Implement Sagars properly
-  1. Food pellets
-  2. Ability to eat other Sagars
-  3. Other Sagars that have AI
+x 0. Implement Sagars properly
+x 1. Food pellets
+x 2. Ability to eat other Sagars
+x 3. Other Sagars that have AI
   4. Splitting of your own Sagar
   5. Scoreboard
 
