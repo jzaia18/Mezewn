@@ -15,7 +15,7 @@ class HumanSagar extends Sagar {
   
 
   void split() {
-    if (_balls.size() < 8 && _totalMass >= 50 && System.currentTimeMillis() - _lastSplitTime >= 5000) {
+    if (_balls.size() < 10 && _balls.peek()._mass >= 50 && System.currentTimeMillis() - _lastSplitTime >= 5000) {
       willSplit = false;
       PriorityQueue<Ball> tmp = new PriorityQueue<Ball>();
       for (Ball b : _balls) {
@@ -25,11 +25,18 @@ class HumanSagar extends Sagar {
       _balls = tmp;
       _lastSplitTime = System.currentTimeMillis();
     }
-    
+  }
+  
+  void merge(HumanBall b1, HumanBall b2){
+     _lastSplitTime = System.currentTimeMillis();
+     _balls.add(new HumanBall(b1._parent, b1._mass + b2._mass, b1.x, b1.y));
+     _balls.remove(b1);
+     _balls.remove(b2);
   }
   
   void display() {
     for (Ball b : _balls) b.display();
-    text("" + _balls.size(), 50, 50);
+    text("# balls: " + _balls.size(), 50, 50);
+    text("Total Mass: " + _totalMass, 50, 60);
   }
 }

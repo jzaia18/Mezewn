@@ -23,7 +23,11 @@ void draw() {
 // For user splitting
 void keyPressed() { 
   if (key == ' ')
-  sagars.get(0).willSplit = true;
+    sagars.get(0).willSplit = true;
+}
+void keyReleased() { 
+  if (key == ' ')
+    sagars.get(0).willSplit = false;
 }
 
 void ballConsumption() {

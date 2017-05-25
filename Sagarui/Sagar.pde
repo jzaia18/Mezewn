@@ -33,6 +33,7 @@ abstract class Sagar {
   }
 
   abstract void split();
+  abstract void merge(HumanBall b1, HumanBall b2);
 
   void targetClosest(){}
 

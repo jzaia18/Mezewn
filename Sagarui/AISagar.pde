@@ -23,6 +23,8 @@ class AISagar extends Sagar {
     _balls = tmp;
   }
   
+  void merge(HumanBall b1, HumanBall b2){}
+  
   void targetClosest(){
     ((AIBall) _balls.peek()).targetClosest(sagars);
   }
