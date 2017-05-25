@@ -9,6 +9,7 @@ abstract class Sagar {
   boolean willSplit;
   ArrayList<Sagar> sagars;
   ArrayList<Mass> _mass;
+  color _col;
 
   void move() {
     for (Ball b : _balls) b.move();

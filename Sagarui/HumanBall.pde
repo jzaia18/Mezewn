@@ -4,11 +4,11 @@ class HumanBall extends Ball {
     float r = random(50,256);
     float g = random(50,256);
     float b = random(50,256);
-    _col = color(r, g, b);
     _mass = 10;
     x = random((width - r) + r/2);
     y = random((height - r) + r/2);
     _parent = s;
+    _col = _parent._col;
   }
 
   HumanBall(Sagar s, int mass) {
@@ -21,6 +21,7 @@ class HumanBall extends Ball {
     x = xcor;
     y = ycor;
   }
+
   
   float getDistFrom(float ox, float oy){
      return dist(x, y, ox, oy); 

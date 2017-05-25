@@ -2,6 +2,10 @@ class HumanSagar extends Sagar {
   
   
   HumanSagar(ArrayList<Sagar> s, ArrayList<Mass> m) {
+    float r = random(50,256);
+    float g = random(50,256);
+    float b = random(50,256);
+    _col = color(r, g, b);
     sagars = s;
     mass = m;
     _balls = new PriorityQueue<Ball>();
