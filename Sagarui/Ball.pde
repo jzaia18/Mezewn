@@ -30,7 +30,7 @@ abstract class Ball implements Comparable {
   abstract void move();
 
   void display() {
-    rad = 7 + (sqrt(_mass) * 1.57);
+    rad = 7 + (sqrt(2.0 * _mass) * 1.57);
     fill(_col);
     noStroke();
     ellipse (x, y, 2*rad, 2*rad);
@@ -48,5 +48,4 @@ abstract class Ball implements Comparable {
    return dist(x, y, dx, dy); 
   }
   
-  void targetClosest(ArrayList<Sagar> s){}
 }

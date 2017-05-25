@@ -7,6 +7,8 @@ abstract class Sagar {
   int _totalMass;
   Sagar _target;
   boolean willSplit;
+  ArrayList<Sagar> sagars;
+  ArrayList<Mass> _mass;
 
   void move() {
     for (Ball b : _balls) b.move();
@@ -46,5 +48,6 @@ abstract class Sagar {
   Sagar getTarget(){ return _target; }
   float getX(){ return _balls.peek().x; }
   float getY(){ return _balls.peek().y; }
+  Ball getBall() { return _balls.peek(); }
 
 }

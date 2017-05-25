@@ -4,9 +4,9 @@ ArrayList<Mass> mass = new ArrayList<Mass>();
 
 void setup() {
   fullScreen();
-  sagars.add(new HumanSagar());
+  sagars.add(new HumanSagar(sagars, mass));
   for (int i=0; i<250; i++) mass.add(new Mass());
-  for (int i=0; i<25; i++) sagars.add(new AISagar());
+  for (int i=0; i<25; i++) sagars.add(new AISagar(sagars, mass));
 }
 
 

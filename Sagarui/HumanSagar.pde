@@ -1,6 +1,9 @@
 class HumanSagar extends Sagar {
-
-  HumanSagar() {
+  
+  
+  HumanSagar(ArrayList<Sagar> s, ArrayList<Mass> m) {
+    sagars = s;
+    mass = m;
     _balls = new PriorityQueue<Ball>();
     _balls.add(new HumanBall(this, 10));
   }

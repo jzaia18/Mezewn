@@ -30,7 +30,7 @@ class AIBall extends Ball {
 
   void move() {
     float speed = max(.002, (.1 - (.001 * (_mass / 4.0)))); //As a decimal (0, 1] representing percent of mouse gap moved
-    if (_parent.getTarget() == null){
+    if (_parent.getTarget() == null) {
         x += (random(width / 8) - x / 8) * speed;
         y += (random(height / 8) - y / 8) * speed;
     }
@@ -41,13 +41,16 @@ class AIBall extends Ball {
   }
   
   void targetClosest(ArrayList<Sagar> s){
-    Sagar closestSagar = s.get(0);
-    float closestDist = closestSagar.getDistFrom(x,y); //Returns distance from THIS ball
-    for (Sagar i: s)
-      if (i != _parent && compareTo(i) > -.2 && i.getDistFrom(x, y) < closestDist){
-        closestSagar = i;
-        closestDist = i.getDistFrom(x, y);
+    Sagar closestSagar = null;
+    float closestDist = 10000; //Returns distance from THIS ball
+    for (int i = 0; i < s.size(); i++) {
+      Sagar j = s.get(i);
+      if (j != _parent && compareTo(j.getBall()) > (_mass * .25) && j.getDistFrom(x, y) < closestDist){
+        closestSagar = j;
+        closestDist = j.getDistFrom(x, y);
       }
+    }
+    
     _parent.setTarget(closestSagar);
   }
   
