@@ -31,12 +31,35 @@ void keyReleased() {
 }
 
 void ballConsumption() {
-  for (Sagar s1 : sagars)
-    for (Sagar s2 : sagars)
-      if (s1 != s2)
-        for (Ball b1 : s1._balls)
-          for (Ball b2 : s2._balls)
-            b1.consume(b2);
+  Iterator it = sagars.iterator();
+  Iterator ti = sagars.iterator();
+  Sagar tmp;
+  Sagar pmt;
+  Ball next;
+  Ball txen;
+  while (it.hasNext()){
+    tmp = (Sagar)it.next();
+    while (ti.hasNext()){
+      pmt = (Sagar)ti.next();
+      if (tmp != pmt){
+        Iterator ball = tmp._balls.iterator();
+        while (ball.hasNext()){
+          next = (Ball)ball.next();
+          Iterator llab = pmt._balls.iterator();
+          while (llab.hasNext()){
+            txen = (Ball)llab.next();
+            next.consume(txen);
+          }
+        }
+      }
+    }
+  }
+  //for (Sagar s1 : sagars)
+  //  for (Sagar s2 : sagars)
+  //    if (s1 != s2)
+  //      for (Ball b1 : s1._balls)
+  //        for (Ball b2 : s2._balls)
+  //          b1.consume(b2);
 }
 
 void massConsumption() { 

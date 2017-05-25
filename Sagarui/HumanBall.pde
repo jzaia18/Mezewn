@@ -20,24 +20,27 @@ class HumanBall extends Ball {
     y = ycor;
   }
 
-  
-  float getDistFrom(float ox, float oy){
-     return dist(x, y, ox, oy); 
+
+  float getDistFrom(float ox, float oy) {
+    return dist(x, y, ox, oy);
   }
 
   void move() {
-    for (Ball b: _parent._balls)
-      if (b != this && b.getDistFrom(x, y) < (.8 * (rad + b.rad))) {
-        if (System.currentTimeMillis() - _parent._lastSplitTime < 5000){
-           x-= (b.x - x) * .08; 
-           y-= (b.y - y) * .08;
-        }
-        else {
-           _parent.merge(this, (HumanBall) b); 
+    Ball b;
+    Iterator it = _parent._balls.iterator();
+    while (it.hasNext()) {
+      b = (Ball)it.next();
+      if (b != this && b.getDistFrom(x, y) < (rad + b.rad)) {
+        if (System.currentTimeMillis() - _parent._lastSplitTime < 5000) {
+          x-= (b.x - x) * .08; 
+          y-= (b.y - y) * .08;
+        } else {
+          _parent.merge(this, (HumanBall) b);
         }
       }
-    float speed = max(.002, (.1 - (.001 * (_mass / 4.0)))); //As a decimal (0, 1] representing percent of mouse gap moved
-    x += (mouseX - x) * speed;
-    y += (mouseY - y) * speed;
+      float speed = max(.002, (.1 - (.001 * (_mass / 4.0)))); //As a decimal (0, 1] representing percent of mouse gap moved
+      x += (mouseX - x) * speed;
+      y += (mouseY - y) * speed;
+    }
   }
 }
