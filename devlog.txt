@@ -80,10 +80,18 @@ Michael Ruvinshteyn: Minor edits; Helped Jake implement AI
 Jake Zaia: Incorporated AI movement (is still very buggy)
 ==============================================================
 
-2017-05-22
+2017-05-23
 --------------------------------------------------------------
 All: Came up with draft for UML, flowchart, plan for AI
 Adeebur Rahman: Started fixing AI, worked on splitting
 Michael Ruvinshteyn: Started fixing AI, worked on splitting
 Jake Zaia: Typed up UMLs and flowchart
+==============================================================
+
+2017-05-24
+--------------------------------------------------------------
+Adeebur Rahman: Worked on splitting
+Michael Ruvinshteyn: Worked on splitting
+Jake Zaia: Fixed bugs involving splitting, incorperated 
+     prototype merging
 ==============================================================
