@@ -22,6 +22,18 @@ void draw() {
   spawnMass();
 }
 
+void mousePressed() {
+  if (player._body.size() > 5) {
+    player.speed = .01;
+    player.degrade = true;
+  }
+}
+
+void mouseReleased() {
+  player.speed = .005;
+  player.degrade = false;
+}
+
 void spawnMass() {
   if (mass.size() > 500) return;
   if (random(100) < 5) mass.add(new Mass());

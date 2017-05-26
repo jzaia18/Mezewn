@@ -6,10 +6,13 @@ abstract class Snek {
   ArrayList<Snek> sneks;
   ArrayList<Mass> _mass;
   color _col;
+  float speed;
+  boolean degrade;
 
   void display() {
     for (Segment seg : _body) seg.display();
-    text("Num Segments: " + _body.size(), _body.getFirst().x, _body.getFirst().y);
+    text("Num Segments: " + _body.size(), _body.getFirst().x+10, _body.getFirst().y);
+    text("Speed: " + speed, _body.getFirst().x+10, _body.getFirst().y+10);
   }
 
   void update() {
@@ -26,5 +29,4 @@ abstract class Snek {
       m.exists = false;
     }
   }
-  
 }

@@ -10,16 +10,15 @@ class Segment {
     _parent = s;
     _col = _parent._col;
   }
-  
+
   Segment(Snek s, float xcor, float ycor) {
-   this(s);
-   x = xcor;
-   y = ycor;
+    this(s);
+    x = xcor;
+    y = ycor;
   }
 
   void display() {
     fill(_col);
-    stroke(128);
-    ellipse(x,y,30,30);
+    ellipse(x, y, 30, 30);
   }
 }
