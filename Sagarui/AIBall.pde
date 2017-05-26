@@ -27,7 +27,7 @@ class AIBall extends Ball {
   }
 
   void move() {
-    float speed = max(.002, (.1 - (.001 * (_mass / 4.0)))); //As a decimal (0, 1] representing percent of mouse gap moved
+    float speed = max(.002, .00001 * (100000.0/_mass)); //As a decimal (0, 1] representing percent of mouse gap moved
     if (_parent.getTarget() == null) {
         x += (random(width / 8) - x / 8) * speed;
         y += (random(height / 8) - y / 8) * speed;
