@@ -16,6 +16,12 @@ class Mass {
     exists = true;
   }
 
+  Mass(float xcor, float ycor) {
+    this();
+    x = xcor;
+    y = ycor;
+  }
+
   void display() {
     fill(_col);
     noStroke();

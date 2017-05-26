@@ -1,10 +1,12 @@
 import java.util.Iterator;
 ArrayList<Sagar> sagars = new ArrayList<Sagar>();
 ArrayList<Mass> mass = new ArrayList<Mass>();
+Sagar player;
 
 void setup() {
   fullScreen();
-  sagars.add(new HumanSagar(sagars, mass));
+  player = new HumanSagar(sagars, mass);
+  sagars.add(player);
   for (int i=0; i<250; i++) mass.add(new Mass());
   for (int i=0; i<25; i++) sagars.add(new AISagar(sagars, mass));
 }
@@ -23,21 +25,24 @@ void draw() {
 // For user splitting
 void keyPressed() { 
   if (key == ' ')
-    sagars.get(0).willSplit = true;
+    player.willSplit = true;
+  if (key == 'w')
+    for (Ball b : player._balls)
+      mass.add(new Mass(b.x+b.rad+20,b.y+b.rad+20));
 }
 void keyReleased() { 
   if (key == ' ')
-    sagars.get(0).willSplit = false;
+    player.willSplit = false;
 }
 
 void ballConsumption() {
   Iterator it = sagars.iterator();
-  Iterator ti = sagars.iterator();
   Sagar tmp;
   Sagar pmt;
   Ball next;
   Ball txen;
   while (it.hasNext()){
+    Iterator ti = sagars.iterator();
     tmp = (Sagar)it.next();
     while (ti.hasNext()){
       pmt = (Sagar)ti.next();

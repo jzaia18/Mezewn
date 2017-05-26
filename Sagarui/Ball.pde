@@ -14,7 +14,7 @@ abstract class Ball implements Comparable {
   }
 
   void consume(Ball b) {
-    if (compareTo(b) > (_mass * .8) && dist(x, y, b.x, b.y) <= rad) {
+    if (compareTo(b) > (_mass * .2) && dist(x, y, b.x, b.y) <= rad) {
       _mass += b._mass;
       b._parent._balls.remove(b);
     }
