@@ -13,11 +13,13 @@ abstract class Ball implements Comparable {
     return _mass - b._mass;
   }
 
-  void consume(Ball b) {
+  boolean consume(Ball b) {
     if (compareTo(b) > (_mass * .2) && dist(x, y, b.x, b.y) <= rad) {
       _mass += b._mass;
-      b._parent._balls.remove(b);
+      return true;
+      //b._parent._balls.remove(b);
     }
+    return false;
   }
 
   void consume(Mass m) {

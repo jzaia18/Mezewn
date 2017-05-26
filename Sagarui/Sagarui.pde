@@ -53,7 +53,8 @@ void ballConsumption() {
           Iterator llab = pmt._balls.iterator();
           while (llab.hasNext()){
             txen = (Ball)llab.next();
-            next.consume(txen);
+            if (next.consume(txen))
+              llab.remove();
           }
         }
       }
