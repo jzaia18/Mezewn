@@ -1,10 +1,12 @@
 import java.util.Iterator;
-ArrayList<Sagar> sagars = new ArrayList<Sagar>();
-ArrayList<Mass> mass = new ArrayList<Mass>();
+ArrayList<Sagar> sagars;
+ArrayList<Mass> mass;
 Sagar player;
 
 void setup() {
   fullScreen();
+  sagars = new ArrayList<Sagar>();
+  mass = new ArrayList<Mass>();
   player = new HumanSagar(sagars, mass);
   sagars.add(player);
   for (int i=0; i<250; i++) mass.add(new Mass());

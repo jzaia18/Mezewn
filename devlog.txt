@@ -99,7 +99,8 @@ Jake Zaia: Fixed bugs involving splitting, incorperated
 2017-05-25
 --------------------------------------------------------------
 Adeebur Rahman: Fixed some ConcurrentModificationExceptions
-	Added basic spit() for debugging	
+	Added basic spit() for debugging
+	Added Snekui framework.
 Michael Ruvinshteyn: Fixed some ConcurrentModificationExceptions
 Jake Zaia: Worked on snek uml
 ==============================================================
