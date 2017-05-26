@@ -16,10 +16,11 @@ class Mass {
     exists = true;
   }
 
-  Mass(float xcor, float ycor) {
+  Mass(float xcor, float ycor, int mass) {
     this();
     x = xcor;
     y = ycor;
+    _mass = mass;
   }
 
   void display() {

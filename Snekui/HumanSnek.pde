@@ -17,7 +17,7 @@ class HumanSnek extends Snek {
     if (degrade) {
       if (_body.size() > 5) {
         Segment tmp = _body.removeLast();
-        if (random(100) < 30) _mass.add(new Mass(tmp.x, tmp.y));
+        if (random(100) < 30) _mass.add(new Mass(tmp.x, tmp.y,1));
       } else {
         speed = .005;
         degrade = false;

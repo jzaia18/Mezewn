@@ -24,7 +24,7 @@ abstract class Snek {
 
   void consume(Mass m) {
     Segment last = _body.getLast();
-    if (dist(_body.getFirst().x, _body.getFirst().y, m.x, m.y) <= 30) {
+    if (dist(_body.getFirst().x, _body.getFirst().y, m.x, m.y) <= 15) {
       _body.addLast(new Segment(this, last.x + 5, last.y + 5));
       m.exists = false;
     }
