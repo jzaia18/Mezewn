@@ -33,23 +33,31 @@ class AIBall extends Ball {
         y += (random(height / 8) - y / 8) * speed;
     }
     else {
-      x += (_parent.getTarget().getX() - x) * speed;
-      y += (_parent.getTarget().getY() - y) * speed;
+      x += (_parent.getTarget().x - x) * speed;
+      y += (_parent.getTarget().y - y) * speed;
     }
   }
   
-  void targetClosest(ArrayList<Sagar> s){
-    Sagar closestSagar = null;
-    float closestDist = 10000; //Returns distance from THIS ball
-    for (int i = 0; i < s.size(); i++) {
-      Sagar j = s.get(i);
-      if (j != _parent && compareTo(j.getBall()) > (_mass * .25) && j.getDistFrom(x, y) < closestDist){
-        closestSagar = j;
-        closestDist = j.getDistFrom(x, y);
+  void targetClosest(ArrayList<Sagar> sagars) {
+    _parent.chasingTarget = null;
+    Ball toTarget = null;
+    for (int i = 0; i < sagars.size(); i++) {
+      Sagar currSagar = sagars.get(i);
+      for (Ball currCheck: currSagar._balls) {
+        if (currCheck.getDistFrom(x, y) < rad + 250) {
+          // If within the Ball's sight distance
+          if (currCheck._mass < _mass * .8 && (toTarget == null || currCheck._mass > toTarget._mass)) {
+            toTarget = currCheck;
+            _parent.chasingTarget = true;
+          }
+          else if (currCheck._mass > _mass * 1.2) {
+            toTarget = currCheck;
+            _parent.chasingTarget = false;
+          }
+        }
       }
     }
-    
-    _parent.setTarget(closestSagar);
+    _parent.setTarget(toTarget);
   }
   
 }

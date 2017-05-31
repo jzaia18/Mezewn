@@ -29,7 +29,7 @@ void draw() {
 void keyPressed() { 
   if (key == ' ')
     player.willSplit = true;
-  if (key == 'w')
+  if (Character.toLowerCase(key) == 'w')
     for (Ball b : player._balls)
       mass.add(new Mass(b.x+b.rad+20,b.y+b.rad+20));
 }

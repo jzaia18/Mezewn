@@ -5,7 +5,8 @@ abstract class Sagar {
   PriorityQueue<Ball> _balls;
   long _lastSplitTime;
   int _totalMass;
-  Sagar _target;
+  Ball _target; //Only used for AIs
+  Boolean chasingTarget; //True if chasing, false if fleeing
   boolean willSplit;
   ArrayList<Sagar> sagars;
   ArrayList<Mass> _mass;
@@ -45,9 +46,9 @@ abstract class Sagar {
    return _balls.peek().getDistFrom(ox,oy); 
   }
   
-  void setTarget(Sagar t){ _target = t; }
+  void setTarget(Ball t){ _target = t; }
   
-  Sagar getTarget(){ return _target; }
+  Ball getTarget(){ return _target; }
   float getX(){ return _balls.peek().x; }
   float getY(){ return _balls.peek().y; }
   Ball getBall() { return _balls.peek(); }
