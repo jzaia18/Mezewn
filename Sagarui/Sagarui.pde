@@ -5,6 +5,7 @@ Sagar player;
 
 void setup() {
   fullScreen();
+  background(0);
   sagars = new ArrayList<Sagar>();
   mass = new ArrayList<Mass>();
   player = new HumanSagar(sagars, mass);

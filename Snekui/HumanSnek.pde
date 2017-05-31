@@ -11,20 +11,23 @@ class HumanSnek extends Snek {
     _body.add(new Segment(this));
     speed = .005;
     degrade = false;
+    exists = true;
+    _name = "Human";
   }
 
   void move() {
     if (degrade) {
       if (_body.size() > 5) {
         Segment tmp = _body.removeLast();
-        if (random(100) < 30) _mass.add(new Mass(tmp.x, tmp.y,1));
+        if (random(100) < 30) _mass.add(new Mass(tmp.x, tmp.y, 1));
       } else {
         speed = .005;
         degrade = false;
       }
     }
     Segment oldFirst = _body.getFirst();
-    _body.addFirst(new Segment(this, oldFirst.x + (mouseX - oldFirst.x) * speed, oldFirst.y + (mouseY - oldFirst.y) * speed));
+    _heading = atan2(mouseY - oldFirst.y, mouseX - oldFirst.x);
+      _body.addFirst(new Segment(this, oldFirst.x + (mouseX - oldFirst.x) * speed, oldFirst.y + (mouseY - oldFirst.y) * speed));
     _body.removeLast();
   }
 }
