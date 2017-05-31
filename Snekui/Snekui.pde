@@ -71,14 +71,18 @@ void deadSneks() {
     Iterator headTi = heads.iterator();
     while (headTi.hasNext()) {
       deah = (Segment) headTi.next();
-      if (head != deah && head.inContactWith(deah)) 
+      if (head != deah && head.inContactWith(deah)) {
         head._parent.smallerSnek(deah._parent).exists = false;
+        return;
+      }
     }
     Iterator segIt = segments.iterator();
     while (segIt.hasNext()) {
       seg = (Segment) segIt.next();
-      if (head._parent != seg._parent && head.inContactWith(seg)) 
+      if (head._parent != seg._parent && head.inContactWith(seg)) {
         head._parent.exists = false;
+        return;
+      }
     }
   }
 }

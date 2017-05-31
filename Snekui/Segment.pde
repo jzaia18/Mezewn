@@ -18,6 +18,7 @@ class Segment {
   }
 
   void display() {
+    noStroke();
     fill(_col);
     ellipse(x, y, 30, 30);
   }

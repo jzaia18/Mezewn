@@ -29,7 +29,7 @@ class AISnek extends Snek {
   }
 
   void move() {
-    if (_target == null || !_target.exists || compareTo(_target) < 0) targetClosest(sneks);
+    if (_target == null || !_target.exists) targetClosest(sneks);
     else {
       Segment targetHead = _target._body.peek();
       Segment oldFirst = _body.getFirst();
@@ -46,7 +46,7 @@ class AISnek extends Snek {
     for (int i = 0; i < s.size(); i++) {
       Snek j = s.get(i);
       Segment jHead = j._body.peek();
-      if (j != this && compareTo(j) > 0 && dist(head.x, head.y, jHead.x, jHead.y) < closestDist) {
+      if (j != this && dist(head.x, head.y, jHead.x, jHead.y) < closestDist) {
         closestSnek = j;
         closestDist = dist(head.x, head.y, jHead.x, jHead.y);
       }

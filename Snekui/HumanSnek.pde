@@ -9,6 +9,8 @@ class HumanSnek extends Snek {
     _mass = m;
     _body = new LinkedList<Segment>();
     _body.add(new Segment(this));
+    for (int j = 0; j < 4; j++) 
+      _body.add(new Segment(this, _body.peek().x, _body.peek().y));
     speed = .005;
     degrade = false;
     exists = true;
@@ -27,7 +29,7 @@ class HumanSnek extends Snek {
     }
     Segment oldFirst = _body.getFirst();
     _heading = atan2(mouseY - oldFirst.y, mouseX - oldFirst.x);
-      _body.addFirst(new Segment(this, oldFirst.x + (mouseX - oldFirst.x) * speed, oldFirst.y + (mouseY - oldFirst.y) * speed));
+    _body.addFirst(new Segment(this, oldFirst.x + (mouseX - oldFirst.x) * speed, oldFirst.y + (mouseY - oldFirst.y) * speed));
     _body.removeLast();
   }
 }
