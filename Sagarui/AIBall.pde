@@ -27,14 +27,14 @@ class AIBall extends Ball {
   }
 
   void move() {
-    float speed = max(.002, .00001 * (100000.0/_mass)); //As a decimal (0, 1] representing percent of mouse gap moved
+    float speed = 8 * pow(_mass, -0.439);
     if (_parent.getTarget() == null) {
-        x += (random(width / 8) - x / 8) * speed;
-        y += (random(height / 8) - y / 8) * speed;
+        x += speed * cos(atan2(random(height / 8) - 9.0 * y / 8, random(width / 8) - 9.0 * x / 8));
+        y += speed * sin(atan2(random(height / 8) - 9.0 * y / 8, random(width / 8) - 9.0 * x / 8));
     }
     else {
-      x += (_parent.getTarget().x - x) * speed;
-      y += (_parent.getTarget().y - y) * speed;
+      x += speed * cos(atan2(_parent.getTarget().y - y, _parent.getTarget().x - x));
+      y += speed * sin(atan2(_parent.getTarget().y - y, _parent.getTarget().x - x));
     }
   }
   

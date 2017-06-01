@@ -10,6 +10,7 @@ class AISagar extends Sagar {
     mass = m;
     _balls = new PriorityQueue<Ball>();
     _balls.add(new AIBall(this, 10));
+    _name = "AI";
   }
 
   void split() {

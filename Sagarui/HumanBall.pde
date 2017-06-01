@@ -38,9 +38,9 @@ class HumanBall extends Ball {
           _parent.merge(this, (HumanBall) b);
         }
       }
-      float speed = max(.002, .00001 * (100000.0/_mass)); //As a decimal (0, 1] representing percent of mouse gap moved
-      x += (mouseX - x) * speed;
-      y += (mouseY - y) * speed;
+      float speed = 8 * pow(_mass, -0.439);
+      x += speed * cos(atan2(mouseY - y, mouseX - x));
+      y += speed * sin(atan2(mouseY - y, mouseX - x));
     }
   }
 }

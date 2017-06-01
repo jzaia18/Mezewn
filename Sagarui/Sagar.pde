@@ -11,6 +11,7 @@ abstract class Sagar {
   ArrayList<Sagar> sagars;
   ArrayList<Mass> _mass;
   color _col;
+  String _name;
 
   void move() {
     for (Ball b : _balls) b.move();

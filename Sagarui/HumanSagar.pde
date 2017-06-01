@@ -10,6 +10,7 @@ class HumanSagar extends Sagar {
     mass = m;
     _balls = new PriorityQueue<Ball>();
     _balls.add(new HumanBall(this, 10));
+    _name = "Player";
   }
 
 

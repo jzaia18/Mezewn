@@ -36,6 +36,8 @@ abstract class Ball implements Comparable {
     fill(_col);
     noStroke();
     ellipse (x, y, 2*rad, 2*rad);
+    fill(255, 255, 255);
+    text(_parent._name, x, y);
   }
   
   int getMass(){
