@@ -11,8 +11,8 @@ class Mass {
     float b = random(50,256);
     _col = color(r, g, b);
     _mass = (int) random(2) + 1;
-    x = random(width);
-    y = random(height);
+    x = random(width - 30) + 15;
+    y = random(height - 30) + 15;
     exists = true;
   }
 

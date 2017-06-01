@@ -9,7 +9,7 @@ abstract class Sagar {
   Boolean chasingTarget; //True if chasing, false if fleeing
   boolean willSplit;
   ArrayList<Sagar> sagars;
-  ArrayList<Mass> _mass;
+  ArrayList<Mass> mass;
   color _col;
   String _name;
 
