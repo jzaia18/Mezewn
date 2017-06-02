@@ -1,0 +1,18 @@
+plan/20170602:
+
+Snekui:
+- Fix ai such that sneks target both mass and other sneks,
+  instead of leading to a stalemate. (look at AISagar for reference)
+
+
+Chrenchui:
+- Make a basic tank that can move with wasd, whose gun rotates towards
+  the mouse cursor.
+- Create some sort of basic shooting.
+- Create basics stats for a tank.
+- Choose which tank classes we should make
+- Decide how we are going to incorporate the classes into a BST.
+- Make the tanks for each class using PShapes.
+- Differentiate the shooting between the different classes.
+- Incorporate upgrades to bullet speed, damage, regen etc.
+- Create AIChrench's that can fight both the human and other AI's.

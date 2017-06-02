@@ -104,3 +104,33 @@ Adeebur Rahman: Fixed some ConcurrentModificationExceptions
 Michael Ruvinshteyn: Fixed some ConcurrentModificationExceptions
 Jake Zaia: Worked on snek uml
 ==============================================================
+
+2017-05-26
+--------------------------------------------------------------
+Adeebur Rahman: Added snek speed boost ability
+Michael Ruvinshteyn: Modified Sagar numbers. (Balance)
+Jake Zaia: Updated README
+==============================================================
+
+2017-05-30
+--------------------------------------------------------------
+Adeebur Rahman: Added basic snek AI
+Michael Ruvinshteyn: 
+Jake Zaia: 
+==============================================================
+
+2017-05-31
+--------------------------------------------------------------
+Adeebur Rahman: Fixed bugs in snek AI.
+Michael Ruvinshteyn: Started chrenchui.
+Jake Zaia: started to fix sagarui AI.
+==============================================================
+
+2017-06-01
+--------------------------------------------------------------
+Adeebur Rahman: Started to mess with tank PShapes.
+		did some flow chart stuff
+		created a new plan
+Michael Ruvinshteyn: 
+Jake Zaia: "Overhaul" of sagarui AI.
+==============================================================
