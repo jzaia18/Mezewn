@@ -43,13 +43,13 @@ class AIBall extends Ball {
       x -= speed * cos(atan2(target.y - y, target.x - x));
       y -= speed * sin(atan2(target.y - y, target.x - x));
     }
-    if (x + rad > width - 30)
-      x = width - 30;
-    if (y + rad > height - 30)
-      y = height - 30;
-    if (x - rad < 0)
+    if (x > width - 75)
+      x = width - 75;
+    if (y > height - 40)
+      y = height - 40;
+    if (x < 0)
       x = 0;
-    if (y - rad < 0)
+    if (y < 0)
       y = 0;
   }
 
@@ -72,7 +72,7 @@ class AIBall extends Ball {
     for (int i = 0; i < sagars.size(); i++) {
       Sagar currSagar = sagars.get(i);
       for (Ball currCheck : currSagar._balls) {
-        if (currCheck.getDistFrom(x, y) < rad + 150) {
+        if (currCheck.getDistFrom(x, y) < rad * 4) {
           // If within the Ball's sight distance
           if (currCheck._mass < _mass * .8 && (toTarget == null || currCheck._mass > toTarget._mass)) {
             toTarget = currCheck;

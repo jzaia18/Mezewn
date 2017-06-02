@@ -91,9 +91,10 @@ void deadSagarRemoval() {
     Sagar s = (Sagar) it.next();
     if (s._balls.size() == 0) it.remove();
   }
+  while (sagars.size() < 25) sagars.add(new AISagar(sagars, mass)); 
 }
 
 void spawnMass() {
-  if (mass.size() > 500) return;
-  if (random(100) < 5) mass.add(new Mass());
+  if (mass.size() > 350) return;
+  if (random(10) < 1 || mass.size() < 50) mass.add(new Mass());
 }
