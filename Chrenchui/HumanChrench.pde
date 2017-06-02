@@ -1,12 +1,11 @@
 class HumanChrench extends Chrench {
 
   void move() {
-    if (wP == true) yPos -= speed;
-    if (aP == true) xPos -= speed;
-    if (sP == true) yPos += speed;
-    if (dP == true) xPos += speed;
+    if (wP) yPos -= speed;
+    if (aP) xPos -= speed;
+    if (sP) yPos += speed;
+    if (dP) xPos += speed;
   }
-
 
   HumanChrench() {
     xPos = random(50, width - 50);
@@ -20,5 +19,14 @@ class HumanChrench extends Chrench {
     gun.setFill(c);
     tank.addChild(body);
     tank.addChild(gun);
+    gun.setStroke(c);
+  }
+  
+  void look(){
+    //pushMatrix();
+    //heading = atan2(xPos - mouseX, yPos - mouseY);
+    //translate(xPos,yPos);
+    //rotate(-heading - HALF_PI);
+    //popMatrix();
   }
 }
