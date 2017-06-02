@@ -26,13 +26,13 @@ void draw() {
 
 void mousePressed() {
   if (player._body.size() > 5) {
-    player.speed = .01;
+    player.speed = 7;
     player.degrade = true;
   }
 }
 
 void mouseReleased() {
-  player.speed = .005;
+  player.speed = 4;
   player.degrade = false;
 }
 
