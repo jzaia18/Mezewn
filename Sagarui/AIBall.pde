@@ -30,18 +30,18 @@ class AIBall extends Ball {
     float speed = 8 * pow(_mass, -0.439);
     if (_parent.getTarget() == null) { // There is no nearby Ball to eat
       Mass target = findNearestMass();
-      x += speed * cos(atan2(target.y - y, target.x - x));
-      y += speed * sin(atan2(target.y - y, target.x - x));
+      x += speed * cos(atan2(target.y - y, target.x - x) + random(-.1,.1));
+      y += speed * sin(atan2(target.y - y, target.x - x) + random(-.1,.1));
     } 
     else if (_parent.chasingTarget) { // If persuing a smaller Ball
       Ball target = _parent.getTarget();
-      x += speed * cos(atan2(target.y - y, target.x - x));
-      y += speed * sin(atan2(target.y - y, target.x - x));
+      x += speed * cos(atan2(target.y - y, target.x - x) + random(-.1,.1));
+      y += speed * sin(atan2(target.y - y, target.x - x) + random(-.1,.1));
     }
     else { // If fleeing a larger Ball
       Ball target = _parent.getTarget();
-      x -= speed * cos(atan2(target.y - y, target.x - x));
-      y -= speed * sin(atan2(target.y - y, target.x - x));
+      x -= speed * cos(atan2(target.y - y, target.x - x) + random(-.1,.1));
+      y -= speed * sin(atan2(target.y - y, target.x - x) + random(-.1,.1));
     }
     if (x > width - 75)
       x = width - 75;
