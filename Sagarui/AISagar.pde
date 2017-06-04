@@ -1,7 +1,7 @@
 class AISagar extends Sagar {
   
   
-  AISagar(ArrayList<Sagar> s, ArrayList<Mass> m) {
+  AISagar(ArrayList<Sagar> s, ArrayList<Mass> m, int i) {
     float r = random(50,256);
     float g = random(50,256);
     float b = random(50,256);
@@ -10,7 +10,7 @@ class AISagar extends Sagar {
     mass = m;
     _balls = new PriorityQueue<Ball>();
     _balls.add(new AIBall(this, 10));
-    _name = "AI";
+    _name = "AI #" + i;
   }
 
   void split() {

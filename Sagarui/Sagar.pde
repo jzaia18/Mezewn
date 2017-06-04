@@ -1,6 +1,6 @@
 import java.util.PriorityQueue;
 
-abstract class Sagar {
+abstract class Sagar implements Comparable {
 
   PriorityQueue<Ball> _balls;
   long _lastSplitTime;
@@ -13,11 +13,19 @@ abstract class Sagar {
   color _col;
   String _name;
 
+  public int compareTo(Object o) {
+    if (!(o instanceof Sagar)) {
+      throw new ClassCastException();
+    }
+    return _totalMass - ((Sagar) o)._totalMass;
+  }
+  
   void move() {
     for (Ball b : _balls) b.move();
   }
 
   void display() {
+    textSize(10);
     for (Ball b : _balls) b.display();
   }
 

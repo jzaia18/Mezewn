@@ -2,6 +2,7 @@ import java.util.Iterator;
 ArrayList<Sagar> sagars;
 ArrayList<Mass> mass;
 Sagar player;
+int AINum;
 
 void setup() {
   fullScreen();
@@ -11,7 +12,7 @@ void setup() {
   player = new HumanSagar(sagars, mass);
   sagars.add(player);
   for (int i=0; i<250; i++) mass.add(new Mass());
-  for (int i=0; i<25; i++) sagars.add(new AISagar(sagars, mass));
+  for (AINum=0; AINum<25; AINum++) sagars.add(new AISagar(sagars, mass, AINum));
   textAlign(CENTER, CENTER);
 }
 
@@ -24,6 +25,7 @@ void draw() {
   ballConsumption();
   massConsumption();
   deadSagarRemoval();
+  leaderBoard();
 }
 
 // For user splitting
@@ -32,7 +34,7 @@ void keyPressed() {
     player.willSplit = true;
   if (Character.toLowerCase(key) == 'w')
     for (Ball b : player._balls)
-      mass.add(new Mass(b.x+b.rad+20,b.y+b.rad+20));
+      mass.add(new Mass(b.x+b.rad+20, b.y+b.rad+20));
 }
 void keyReleased() { 
   if (key == ' ')
@@ -45,17 +47,17 @@ void ballConsumption() {
   Sagar pmt;
   Ball next;
   Ball txen;
-  while (it.hasNext()){
+  while (it.hasNext()) {
     Iterator ti = sagars.iterator();
     tmp = (Sagar)it.next();
-    while (ti.hasNext()){
+    while (ti.hasNext()) {
       pmt = (Sagar)ti.next();
-      if (tmp != pmt){
+      if (tmp != pmt) {
         Iterator ball = tmp._balls.iterator();
-        while (ball.hasNext()){
+        while (ball.hasNext()) {
           next = (Ball)ball.next();
           Iterator llab = pmt._balls.iterator();
-          while (llab.hasNext()){
+          while (llab.hasNext()) {
             txen = (Ball)llab.next();
             if (next.consume(txen))
               llab.remove();
@@ -91,10 +93,26 @@ void deadSagarRemoval() {
     Sagar s = (Sagar) it.next();
     if (s._balls.size() == 0) it.remove();
   }
-  while (sagars.size() < 25) sagars.add(new AISagar(sagars, mass)); 
+  while (sagars.size() < 25) {
+    sagars.add(new AISagar(sagars, mass, AINum));
+    AINum++;
+  }
 }
 
 void spawnMass() {
   if (mass.size() > 350) return;
   if (random(10) < 1 || mass.size() < 50) mass.add(new Mass());
+}
+void leaderBoard() {
+  ArrayList<Sagar> orderedSagars = MergeSort.sort(sagars);
+  int min = 0;
+  if (orderedSagars.size() > 5)
+    min = orderedSagars.size() - 5;
+  textSize(20);
+  fill(255);
+  text("Top 5 Leader Board", width - 250, 30);
+  for (int i = orderedSagars.size()-1; i >= min; i--) {
+    Sagar s = orderedSagars.get(i); 
+    text(s._name + ": " + s._totalMass, width - 250, 30 + 20 * (orderedSagars.size() - i));
+  }
 }
