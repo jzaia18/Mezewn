@@ -7,7 +7,7 @@ abstract class Snek implements Comparable {
   ArrayList<Mass> masses;
   color _col;
   float speed, _heading, x, y;
-  boolean degrade, exists;
+  boolean degrade, exists, inDanger;
   String _name;
 
   public int compareTo(Object o) {

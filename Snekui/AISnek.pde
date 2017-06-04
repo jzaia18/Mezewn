@@ -36,9 +36,11 @@ class AISnek extends Snek {
       Mass toEat = targetMass();
       _heading = atan2(toEat.y - oldFirst.y, toEat.x - oldFirst.x) + random(-.15, .15);
       _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
-    }
-    else {
-     _heading = atan2((_target.y + sin(_target._heading) * 90) - oldFirst.y, (_target.x + cos(_target._heading) * 90) - oldFirst.x) + random(-.1, .1);
+    } else if (inDanger){
+      _heading += random(-1.6, 1.6);
+      _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
+    } else {
+      _heading = atan2((_target.y + sin(_target._heading) * 200) - oldFirst.y, (_target.x + cos(_target._heading) * 200) - oldFirst.x) + random(-.1, .1);
       _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
     }
     _body.removeLast();
@@ -52,7 +54,7 @@ class AISnek extends Snek {
     for (Snek checkSnek : sneks) {
       Segment checkHead = checkSnek._body.peek();
       float distFromCheck = dist(checkHead.x, checkHead.y, x, y);
-      if ( distFromCheck < 200 && checkSnek != this && (_target == null || distFromCheck < targetDist)) {
+      if ( distFromCheck < 220 && checkSnek != this && (_target == null || distFromCheck < targetDist)) {
         _target = checkSnek;
         targetDist = distFromCheck;
       }

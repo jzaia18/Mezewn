@@ -17,7 +17,8 @@ class Segment {
     ellipse(x, y, 30, 30);
   }
   
+  /*
   boolean inContactWith(Segment s) {
     return dist(x, y, s.x, s.y) <= 30; 
-  }
+  }*/
 }
