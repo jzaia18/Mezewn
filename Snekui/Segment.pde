@@ -4,15 +4,9 @@ class Segment {
   color _col; 
   Snek _parent;
 
-  Segment(Snek s) {
-    x = random(width);
-    y = random(height);
+  Segment(Snek s, float xcor, float ycor) {
     _parent = s;
     _col = _parent._col;
-  }
-
-  Segment(Snek s, float xcor, float ycor) {
-    this(s);
     x = xcor;
     y = ycor;
   }

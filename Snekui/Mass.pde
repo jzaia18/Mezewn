@@ -10,17 +10,16 @@ class Mass {
     float g = random(50,256);
     float b = random(50,256);
     _col = color(r, g, b);
-    _mass = (int) random(2) + 1;
+    _mass = 1;
     x = random(width);
     y = random(height);
     exists = true;
   }
 
-  Mass(float xcor, float ycor, int mass) {
+  Mass(float xcor, float ycor) {
     this();
     x = xcor;
     y = ycor;
-    _mass = mass;
   }
 
   void display() {

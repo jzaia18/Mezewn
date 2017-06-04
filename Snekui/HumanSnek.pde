@@ -6,11 +6,13 @@ class HumanSnek extends Snek {
     float b = random(50, 256);
     _col = color(r, g, b);
     sneks = s;
-    _mass = m;
+    masses = m;
+    x = random(width);
+    y = random(height);
     _body = new LinkedList<Segment>();
-    _body.add(new Segment(this));
+    _body.add(new Segment(this, x, y));
     for (int j = 0; j < 4; j++) 
-      _body.add(new Segment(this, _body.peek().x, _body.peek().y));
+      _body.add(new Segment(this, x, y));
     speed = 4;
     degrade = false;
     exists = true;
@@ -21,9 +23,10 @@ class HumanSnek extends Snek {
     if (degrade) {
       if (_body.size() > 5) {
         Segment tmp = _body.removeLast();
-        if (random(100) < 30) _mass.add(new Mass(tmp.x, tmp.y, 1));
+        if (random(100) < 30) masses.add(new Mass(tmp.x, tmp.y));
       } else {
         degrade = false;
+        speed = 4;
       }
     }
     Segment oldFirst = _body.getFirst();
@@ -31,5 +34,7 @@ class HumanSnek extends Snek {
     _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
     //_body.addFirst(new Segment(this, oldFirst.x + (mouseX - oldFirst.x) * speed, oldFirst.y + (mouseY - oldFirst.y) * speed));
     _body.removeLast();
+    x = _body.peek().x;
+    y = _body.peek().y;
   }
 }

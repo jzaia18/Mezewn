@@ -4,9 +4,9 @@ abstract class Snek implements Comparable {
 
   LinkedList<Segment> _body;
   ArrayList<Snek> sneks;
-  ArrayList<Mass> _mass;
+  ArrayList<Mass> masses;
   color _col;
-  float speed, _heading;
+  float speed, _heading, x, y;
   boolean degrade, exists;
   String _name;
 
@@ -47,7 +47,7 @@ abstract class Snek implements Comparable {
     if (dist(_body.getFirst().x, _body.getFirst().y, m.x, m.y) <= 15) {
       m.exists = false;
       if (_body.size() > 1) _body.addLast(new Segment(this, last.x + (last.x - _body.get(_body.size()-2).x), last.y + (last.y - _body.get(_body.size()-2).y)));
-      else _body.addLast(new Segment(this, last.x + random(-5, 5), last.y + random(-5, 5)));
+      else _body.addLast(new Segment(this, last.x + random(-1, 1), last.y + random(-1, 1)));
     }
   }
 }

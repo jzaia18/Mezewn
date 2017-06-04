@@ -2,6 +2,7 @@ import java.util.Iterator;
 ArrayList<Snek> sneks;
 ArrayList<Mass> mass;
 Snek player;
+int AINum;
 
 void setup() {
   fullScreen();
@@ -11,7 +12,7 @@ void setup() {
   player = new HumanSnek(sneks, mass);
   sneks.add(player);
   for (int i=0; i<250; i++) mass.add(new Mass());
-  for (int i=0; i<10; i++) sneks.add(new AISnek(sneks, mass, i));
+  for (AINum=0; AINum<10; AINum++) sneks.add(new AISnek(sneks, mass, AINum));
 }
 
 void draw() {
@@ -21,13 +22,20 @@ void draw() {
   deadSnekRemoval();
   deadSneks();
   massConsumption();
+  if (sneks.size() < 10 && random(100) < 1){
+    AINum++;
+    sneks.add(new AISnek(sneks, mass, AINum));
+  }
   spawnMass();
 }
 
 void mousePressed() {
-  if (player._body.size() > 5) {
+  if (player._body.size() > 6) {
     player.speed = 7;
     player.degrade = true;
+  } else {
+    player.speed = 4;
+    player.degrade = false;
   }
 }
 
@@ -52,35 +60,25 @@ void massConsumption() {
 }
 
 void deadSneks() {
-  Iterator it = sneks.iterator();
-  ArrayList heads = new ArrayList <Segment>(), segments = new ArrayList<Segment>();
-  Snek snek;
-  Segment seg, head, deah;
-  while (it.hasNext()) {
-    snek = (Snek) it.next();
-    Iterator snekIt = snek._body.iterator();
-    while (snekIt.hasNext()) {
-      seg = (Segment) snekIt.next();
-      if (seg == seg._parent._body.peek()) heads.add(seg);
-      else segments.add(seg);
+  ArrayList heads = new ArrayList<Segment>(), segments = new ArrayList<Segment>();
+  Iterator allSneksIt = sneks.iterator();
+  while (allSneksIt.hasNext()) { // Iterates through all Sneks in the game
+    Snek currSnek = (Snek) allSneksIt.next(); 
+    Iterator currSnekIt = currSnek._body.iterator();
+    while (currSnekIt.hasNext()) { // Iterates through a given Snek to get its body segments
+      Segment currSeg = (Segment) currSnekIt.next();
+      if (currSeg == currSeg._parent._body.peek()) heads.add(currSeg); // Add the head to the head ArrayList
+      else segments.add(currSeg); // Add the other body segments to the segments ArrayList
     }
   }
-  Iterator headIt = heads.iterator();
-  while (headIt.hasNext()) {
-    head = (Segment) headIt.next();
-    Iterator headTi = heads.iterator();
-    while (headTi.hasNext()) {
-      deah = (Segment) headTi.next();
-      if (head != deah && head.inContactWith(deah)) {
-        head._parent.smallerSnek(deah._parent).exists = false;
-        return;
-      }
-    }
+  Iterator allHeadsIt = heads.iterator();
+  while (allHeadsIt.hasNext()) { // Iterates through the ArrayList of all heads
+    Segment currHead = (Segment) allHeadsIt.next();
     Iterator segIt = segments.iterator();
-    while (segIt.hasNext()) {
-      seg = (Segment) segIt.next();
-      if (head._parent != seg._parent && head.inContactWith(seg)) {
-        head._parent.exists = false;
+    while (segIt.hasNext()) { // Iterates through all segments to make sure they are not in contact with the current head
+      Segment currSeg = (Segment) segIt.next();
+      if (currHead._parent != currSeg._parent && currHead.inContactWith(currSeg)) {
+        currHead._parent.exists = false;
         return;
       }
     }
@@ -88,8 +86,17 @@ void deadSneks() {
 }
 
 void deadSnekRemoval() {
-  Iterator it = sneks.iterator();
-  while (it.hasNext())  
-    if (((Snek) it.next()).exists == false) 
-      it.remove();
+  Iterator snekIt = sneks.iterator();
+  while (snekIt.hasNext()) {  // Iterates through all Sneks and removes the ones that should be dead
+    Snek currSnek = ((Snek) snekIt.next());
+    if (!currSnek.exists) {
+      Iterator bodyIt = currSnek._body.iterator();
+      while (bodyIt.hasNext()) {
+        Segment currSeg = (Segment) bodyIt.next(); 
+        if (random(4) < 1)
+          mass.add(new Mass(currSeg.x, currSeg.y));
+      }
+      snekIt.remove();
+    }
+  }
 }

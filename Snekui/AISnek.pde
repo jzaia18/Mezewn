@@ -8,12 +8,13 @@ class AISnek extends Snek {
     float b = random(50, 256);
     _col = color(r, g, b);
     sneks = s;
-    _mass = m;
+    masses = m;
+    x = random(width);
+    y = random(height);
     _body = new LinkedList<Segment>();
-    _body.add(new Segment(this));
-    int rand = (int) random(4, 15);
-    for (int j = 0; j < rand; j++) 
-      _body.add(new Segment(this, _body.peek().x, _body.peek().y));
+    _body.add(new Segment(this, x, y));
+    for (int j = (int) random(4, 15); j > 4; j--) 
+      _body.add(new Segment(this, x, y));
     exists = true;
     speed = 4;
     _name = "AISnek #" + i;
@@ -29,28 +30,45 @@ class AISnek extends Snek {
   }
 
   void move() {
-    if (_target == null || !_target.exists) targetClosest(sneks);
+    Segment oldFirst = _body.getFirst();
+    targetClosest();
+    if (_target == null) {
+      Mass toEat = targetMass();
+      _heading = atan2(toEat.y - oldFirst.y, toEat.x - oldFirst.x) + random(-.15, .15);
+      _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
+    }
     else {
-      Segment targetHead = _target._body.peek();
-      Segment oldFirst = _body.getFirst();
-      _heading = atan2( (targetHead.y + _target._heading * speed) - oldFirst.y, (targetHead.x + _target._heading * speed) - oldFirst.x) + random(-.1, .1);
-      _body.addFirst(new Segment(this, oldFirst.x + _heading * speed, oldFirst.y + _heading * speed));
-      _body.removeLast();
+     _heading = atan2((_target.y + sin(_target._heading) * 90) - oldFirst.y, (_target.x + cos(_target._heading) * 90) - oldFirst.x) + random(-.1, .1);
+      _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
+    }
+    _body.removeLast();
+    x = _body.peek().x;
+    y = _body.peek().y;
+  }
+
+  void targetClosest() {
+    _target = null;
+    float targetDist = 0;
+    for (Snek checkSnek : sneks) {
+      Segment checkHead = checkSnek._body.peek();
+      float distFromCheck = dist(checkHead.x, checkHead.y, x, y);
+      if ( distFromCheck < 200 && checkSnek != this && (_target == null || distFromCheck < targetDist)) {
+        _target = checkSnek;
+        targetDist = distFromCheck;
+      }
     }
   }
 
-  void targetClosest(ArrayList<Snek> s) {
-    Segment head = _body.peek();
-    Snek closestSnek = s.get(0);
-    float closestDist = dist(head.x, head.y, closestSnek._body.peek().x, closestSnek._body.peek().y);
-    for (int i = 1; i < s.size(); i++) {
-      Snek j = s.get(i);
-      Segment jHead = j._body.peek();
-      if (j != this && dist(head.x, head.y, jHead.x, jHead.y) < closestDist - 30) {
-        closestSnek = j;
-        closestDist = dist(head.x, head.y, jHead.x, jHead.y);
+  Mass targetMass() {
+    Mass closestMass = masses.get(0);
+    float closestDist = dist(closestMass.x, closestMass.y, x, y);
+    for (Mass m : masses) {
+      float checkDist = dist(m.x, m.y, x, y);
+      if ( checkDist < closestDist) {
+        closestMass = m;
+        closestDist = checkDist;
       }
     }
-    _target = closestSnek;
+    return closestMass;
   }
 }
