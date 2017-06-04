@@ -30,7 +30,9 @@ class HumanSnek extends Snek {
       }
     }
     Segment oldFirst = _body.getFirst();
-    _heading = atan2(mouseY - oldFirst.y, mouseX - oldFirst.x);
+    if (abs(oldFirst.x - mouseX) > 10 && abs(oldFirst.y - mouseY) > 10) {
+      _heading = atan2(mouseY - oldFirst.y, mouseX - oldFirst.x);
+    }
     _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
     //_body.addFirst(new Segment(this, oldFirst.x + (mouseX - oldFirst.x) * speed, oldFirst.y + (mouseY - oldFirst.y) * speed));
     _body.removeLast();
