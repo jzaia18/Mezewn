@@ -28,7 +28,7 @@ class AIBall extends Ball {
 
   void move() {
     float speed = 8 * pow(_mass, -0.439);
-    if (_parent.getTarget() == null) { // There is no nearby Ball to eat
+    if (_parent.getTarget() == null && _parent.mass.size() != 0) { // There is no nearby Ball to eat
       Mass target = findNearestMass();
       x += speed * cos(atan2(target.y - y, target.x - x) + random(-.1,.1));
       y += speed * sin(atan2(target.y - y, target.x - x) + random(-.1,.1));

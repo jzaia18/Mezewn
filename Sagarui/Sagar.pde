@@ -19,21 +19,22 @@ abstract class Sagar implements Comparable {
     }
     return _totalMass - ((Sagar) o)._totalMass;
   }
-  
+
   void move() {
     for (Ball b : _balls) b.move();
   }
 
   void display() {
     textSize(10);
+    textAlign(CENTER, CENTER);
     for (Ball b : _balls) b.display();
   }
 
   void calcMass() {
     _totalMass = 0;
-    for (Ball b: _balls) _totalMass += b.getMass();
+    for (Ball b : _balls) _totalMass += b.getMass();
   }
-  
+
   void update() {
     targetClosest();
     move();
@@ -45,21 +46,31 @@ abstract class Sagar implements Comparable {
   abstract void split();
   abstract void merge(HumanBall b1, HumanBall b2);
 
-  void targetClosest(){}
+  void targetClosest() {
+  }
 
   int getMass() {
-      return _totalMass;
+    return _totalMass;
   }
-  
-  float getDistFrom(float ox, float oy){
-   return _balls.peek().getDistFrom(ox,oy); 
-  }
-  
-  void setTarget(Ball t){ _target = t; }
-  
-  Ball getTarget(){ return _target; }
-  float getX(){ return _balls.peek().x; }
-  float getY(){ return _balls.peek().y; }
-  Ball getBall() { return _balls.peek(); }
 
+  float getDistFrom(float ox, float oy) {
+    return _balls.peek().getDistFrom(ox, oy);
+  }
+
+  void setTarget(Ball t) { 
+    _target = t;
+  }
+
+  Ball getTarget() { 
+    return _target;
+  }
+  float getX() { 
+    return _balls.peek().x;
+  }
+  float getY() { 
+    return _balls.peek().y;
+  }
+  Ball getBall() { 
+    return _balls.peek();
+  }
 }

@@ -17,7 +17,7 @@ class AISnek extends Snek {
       _body.add(new Segment(this, x, y));
     exists = true;
     speed = 4;
-    _name = "AISnek #" + i;
+    _name = "AI #" + i;
   }
 
   String toString() {
@@ -32,7 +32,7 @@ class AISnek extends Snek {
   void move() {
     Segment oldFirst = _body.getFirst();
     targetClosest();
-    if (_target == null) {
+    if (_target == null && masses.size() != 0) {
       Mass toEat = targetMass();
       _heading = atan2(toEat.y - oldFirst.y, toEat.x - oldFirst.x) + random(-.15, .15);
       _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));

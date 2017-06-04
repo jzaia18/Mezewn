@@ -16,7 +16,7 @@ class HumanSnek extends Snek {
     speed = 4;
     degrade = false;
     exists = true;
-    _name = "Human";
+    _name = "Player";
   }
 
   void move() {

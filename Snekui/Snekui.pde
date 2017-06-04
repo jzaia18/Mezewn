@@ -3,6 +3,7 @@ ArrayList<Snek> sneks;
 ArrayList<Mass> masses;
 Snek player;
 int AINum;
+boolean respawn1, respawn2;
 
 void setup() {
   fullScreen();
@@ -24,16 +25,40 @@ void draw() {
   massConsumption();
   spawnMasses();
   spawnSneks();
+  playerStats();
   leaderBoard();
+  respawn();
 }
 
 void mousePressed() {
-  if (player._body.size() > 6) {
-    player.speed = 7;
-    player.degrade = true;
+  if (player.exists) {
+    if (player._body.size() > 6) {
+      player.speed = 7;
+      player.degrade = true;
+    } else {
+      player.speed = 4;
+      player.degrade = false;
+    }
   } else {
-    player.speed = 4;
-    player.degrade = false;
+    if (respawn1) {
+      if (mouseX > width/2-75 && mouseX < width/2+75) { 
+        if (mouseY > height/2-80 && mouseY < height/2) {
+          player = new HumanSnek(sneks, masses);
+          sneks.add(player);
+          respawn1 = false;
+        }
+        if (mouseY > height/2+40 && mouseY < height/2+120) {
+          respawn1 = false;
+          respawn2 = true;
+        }
+      }
+    } else if (respawn2) {
+      if (mouseX > 85 && mouseX < 160 && mouseY > height-80 && mouseY < height-50) {
+        player = new HumanSnek(sneks, masses);
+        sneks.add(player);
+        respawn2 = false;
+      }
+    }
   }
 }
 
@@ -107,6 +132,8 @@ void deadSnekRemoval() {
         if (random(4) < 1)
           masses.add(new Mass(currSeg.x, currSeg.y));
       }
+      if (currSnek == player)
+        respawn1 = true;
       snekIt.remove();
     }
   }
@@ -118,10 +145,46 @@ void leaderBoard() {
   if (orderedSneks.size() > 5)
     min = orderedSneks.size() - 5;
   textSize(20);
+  textAlign(TOP, RIGHT);
   fill(255);
   text("Top 5 Leader Board", width - 250, 30);
   for (int i = orderedSneks.size()-1; i >= min; i--) {
     Snek s = orderedSneks.get(i); 
     text(s._name + ": " + s._body.size(), width - 250, 30 + 20 * (orderedSneks.size() - i));
   }
+}
+
+void respawn() {
+  if (respawn1) {
+    fill(255);
+    textSize(25);
+    textAlign(CENTER, CENTER);
+    text("You died. Click to respawn or spectate.", width/2, height/2-130);
+    fill(177);
+    rect(width/2-75, height/2-80, 150, 80);
+    fill(255);
+    textSize(20);
+    text("Respawn", width/2, height/2-40);
+    fill(177);
+    rect(width/2-75, height/2+40, 150, 80);
+    fill(255);
+    text("Spectate", width/2, height/2+80);
+  } else if (respawn2) {
+    fill(177);
+    rect(85, height-80, 75, 30);
+    textSize(14);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    text("Respawn", 125, height-65);
+  }
+}
+
+void playerStats() {
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(20);
+  text("Player Stats", 125, height-115);
+  textSize(12);
+  if (player.exists) text("Length: " + player._body.size(), 125, height-95);
+  else text("Length: 0", 125, height-95);
 }

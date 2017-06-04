@@ -36,11 +36,4 @@ class HumanSagar extends Sagar {
     tmp.remove(b2);
     _balls = tmp;
   }
-
-  void display() {
-    textSize(10);
-    for (Ball b : _balls) b.display();
-    text("# balls: " + _balls.size(), 50, 50);
-    text("Total Mass: " + _totalMass, 50, 60);
-  }
 }
