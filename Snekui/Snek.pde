@@ -25,6 +25,8 @@ abstract class Snek implements Comparable {
 
   void display() {
     for (Segment seg : _body) seg.display();
+    textSize(10);
+    fill(255);
     text(toString(), _body.getFirst().x+10, _body.getFirst().y);
   }
 

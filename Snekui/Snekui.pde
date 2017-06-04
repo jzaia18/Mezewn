@@ -24,6 +24,7 @@ void draw() {
   massConsumption();
   spawnMasses();
   spawnSneks();
+  leaderBoard();
 }
 
 void mousePressed() {
@@ -47,7 +48,7 @@ void spawnMasses() {
 }
 
 void spawnSneks() {
-  if (sneks.size() < 10 && random(100) < 2.5){
+  if (sneks.size() < 10 && random(100) < 2.5) {
     AINum++;
     sneks.add(new AISnek(sneks, masses, AINum));
   }
@@ -108,5 +109,19 @@ void deadSnekRemoval() {
       }
       snekIt.remove();
     }
+  }
+}
+
+void leaderBoard() {
+  ArrayList<Snek> orderedSneks = MergeSort.sort(sneks);
+  int min = 0;
+  if (orderedSneks.size() > 5)
+    min = orderedSneks.size() - 5;
+  textSize(20);
+  fill(255);
+  text("Top 5 Leader Board", width - 250, 30);
+  for (int i = orderedSneks.size()-1; i >= min; i--) {
+    Snek s = orderedSneks.get(i); 
+    text(s._name + ": " + s._body.size(), width - 250, 30 + 20 * (orderedSneks.size() - i));
   }
 }
