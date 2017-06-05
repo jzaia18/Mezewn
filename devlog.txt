@@ -158,6 +158,6 @@ Adeebur Rahman: Leaderboards
 	Chrenchui Framework
 	Added a main menu
 	created a way to return to the main menu.
-Michael Ruvinshteyn: 
+Michael Ruvinshteyn: Began developing shooting concept for Chrenchui
 Jake Zaia: Began commenting up and reformatting all code
 ==============================================================
