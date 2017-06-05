@@ -14,6 +14,7 @@ void setup() {
 
 void draw() {
   if (mainMenu && !inGame) {
+    background(0);
     imageMode(CENTER);
     image(sagar, 300, height/2);
     image(snek, width-300, height/2);
@@ -37,12 +38,17 @@ void draw() {
     text("Chrenchui", width/2, height/2+475);
   } else if (!mainMenu && inGame && game != null) {
     game.draw();
+    fill(128);
+    rect(width-160, height-80, 80, 30);
+    textSize(14);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    text("Main Menu", width-120, height-65);
   }
 }
 
 void mouseClicked() {
   if (mainMenu && !inGame) {
-    //todo make a real main menu 
     if (mouseX > width/2-50 && mouseX < width/2+50) {
       if (mouseY > height/2-100 && mouseY < height/2-50) {        
         game = new Sagarui();
@@ -67,21 +73,26 @@ void mouseClicked() {
     }
   } else if (!mainMenu && inGame) {
     game.mouseClicked();
+    if (mouseX > width-160 && mouseX < width-80 && mouseY > height-80 && mouseY < height-50) {
+     game = null;
+     inGame = false;
+     mainMenu = true;
+    }
   }
 }
 
 void mousePressed() {
   if (!mainMenu && inGame && game != null) 
-    game.mousePressed();
+  game.mousePressed();
 }
 
 void mouseReleased() {
   if (!mainMenu && inGame && game != null) 
-    game.mouseReleased();
+  game.mouseReleased();
 }
 
 
 void keyPressed() {
   if (!mainMenu && inGame && game != null) 
-    game.keyPressed();
+  game.keyPressed();
 }
