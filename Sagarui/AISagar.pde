@@ -1,6 +1,6 @@
 class AISagar extends Sagar {
   
-  
+  // Constructs a new AISagar
   AISagar(ArrayList<Sagar> s, ArrayList<Mass> m, int i) {
     float r = random(50,256);
     float g = random(50,256);
@@ -13,19 +13,22 @@ class AISagar extends Sagar {
     _name = "AI #" + i;
   }
 
+
+  // Splits an AISagar (doubles the amount of Balls, halves their  Mass)
   void split() {
     PriorityQueue<Ball> tmp = new PriorityQueue<Ball>();
     for (Ball b : _balls) {
       if (b._mass > 50) {
-        tmp.add(new AIBall(this, b._mass/2, b.x+50, b.y+50)); //fix placement
-        tmp.add(new AIBall(this, b._mass/2, b.x-50, b.y-50));
+        float direction = random(-3.14, 3.14);
+        tmp.add(new AIBall(this, b._mass / 2, b.x + 3 * b.rad * cos(direction), b.y + 3 * b.rad * sin(direction)));
+        tmp.add(new AIBall(this, b._mass / 2, b.x, b.y));
       } else tmp.add(b);
     }
     _balls = tmp;
   }
   
-  void merge(HumanBall b1, HumanBall b2){}
   
+  // Asks the smallest Ball to decide what to target (This is good because the smallest Ball is the most afraid of getting eaten)
   void targetClosest(){
     ((AIBall) _balls.peek()).targetClosest(sagars);
   }

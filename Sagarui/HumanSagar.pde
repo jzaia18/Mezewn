@@ -1,6 +1,6 @@
 class HumanSagar extends Sagar {
 
-
+  // Construct a new HumanSagar
   HumanSagar(ArrayList<Sagar> s, ArrayList<Mass> m) {
     float r = random(50, 256);
     float g = random(50, 256);
@@ -14,13 +14,14 @@ class HumanSagar extends Sagar {
   }
 
 
-
+  // Splits this all Balls into 2 Balls of half mass
   void split() {
-    if (_balls.size() < 10 && _balls.peek()._mass >= 50 && System.currentTimeMillis() - _lastSplitTime >= 1000) {
+    if (_balls.size() < 10 && _balls.peek()._mass >= 50 && System.currentTimeMillis() - _lastSplitTime >= 1500) {
       willSplit = false;
       PriorityQueue<Ball> tmp = new PriorityQueue<Ball>();
       for (Ball b : _balls) {
-        tmp.add(new HumanBall(this, b._mass / 2, b.x + b.rad, b.y + b.rad));
+        float direction = atan2(mouseY - b.y, mouseX - b.x);
+        tmp.add(new HumanBall(this, b._mass / 2, b.x + 3 * b.rad * cos(direction), b.y + 3 * b.rad * sin(direction)));
         tmp.add(new HumanBall(this, b._mass / 2, b.x, b.y));
       }
       _balls = tmp;
@@ -28,6 +29,7 @@ class HumanSagar extends Sagar {
     }
   }
 
+  // Merge 2 Balls  
   void merge(HumanBall b1, HumanBall b2) {
     PriorityQueue<Ball> tmp = new PriorityQueue<Ball>(_balls);
     _lastSplitTime = System.currentTimeMillis();

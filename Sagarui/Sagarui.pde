@@ -3,106 +3,144 @@ ArrayList<Sagar> sagars;
 ArrayList<Mass> mass;
 Sagar player;
 int AINum;
-boolean respawn1, respawn2;
+boolean playerIsDead, playerIsSpectating;
+final boolean debug = false; // Turn on for debug tools
 
+// Sets up the game
 void setup() {
   fullScreen();
   background(0);
-  sagars = new ArrayList<Sagar>();
-  mass = new ArrayList<Mass>();
-  player = new HumanSagar(sagars, mass);
+  sagars = new ArrayList<Sagar>(); // All players in the game
+  mass = new ArrayList<Mass>(); // All small edible masses
+  player = new HumanSagar(sagars, mass); 
   sagars.add(player);
-  for (int i=0; i<250; i++) mass.add(new Mass());
-  for (AINum=0; AINum<25; AINum++) sagars.add(new AISagar(sagars, mass, AINum));
+  for (int i=0; i<300; i++) mass.add(new Mass()); // Start the world with 300 small masses (True cap is 400)
+  for (AINum=0; AINum<25; AINum++) sagars.add(new AISagar(sagars, mass, AINum)); // There are always 25 players (Except when waiting for respawn)
 }
 
 
+// Main function that loops while the game is in progress
 void draw() {
   background(0);
-  for (Sagar s : sagars) s.update();
-  for (Mass m : mass) m.display();
-  spawnMass();
-  ballConsumption();
-  massConsumption();
-  deadSagarRemoval();
-  respawn();
-  leaderBoard();
-  playerStats();
+  updateMasses();
+  updateSagars();
+  updateLeaderboard();
 }
 
-// For user splitting
+
+// For user controls
 void keyPressed() { 
-  if (player._balls.size() > 0) {
-    if (key == ' ')
+  if (! playerIsDead) {
+
+    // Press space to split
+    if (key == ' ') 
       player.willSplit = true;
-    if (Character.toLowerCase(key) == 'w')
-      for (Ball b : player._balls)
-        mass.add(new Mass(b.x+b.rad+20, b.y+b.rad+20));
+
+    // Press W to eject a small portion of your mass
+    if (Character.toLowerCase(key) == 'w') 
+      for (Ball b : player._balls) {
+        if (b._mass > 50) {
+          float direction = atan2(mouseY - b.y, mouseX - b.x);
+          mass.add(new Mass(b.x + 3 * b.rad * cos(direction), b.y + 3 * b.rad * sin(direction), (int) (b._mass * .02)));
+          b._mass = b._mass - (int) (b._mass * .025);
+        }
+      }
+
+    // debug tool, press ` to  spawn infinite Mass
+    if (debug && Character.toLowerCase(key) == '`') 
+      for (Ball b : player._balls) {
+        float direction = atan2(mouseY - b.y, mouseX - b.x);
+        mass.add(new Mass(b.x + 1.6 * b.rad * cos(direction), b.y + 1.6 * b.rad * sin(direction)));
+      }
   }
 }
 
-void keyReleased() { 
-  if (key == ' ')
-    player.willSplit = false;
-}
 
+// For respawn options
 void mouseClicked() {
-  if (player._balls.size() == 0) {
-    if (respawn1) {
-      if (mouseX > width/2-75 && mouseX < width/2+75) { 
-        if (mouseY > height/2-80 && mouseY < height/2) {
-          player = new HumanSagar(sagars, mass);
-          sagars.add(player);
-          respawn1 = false;
-        }
-        if (mouseY > height/2+40 && mouseY < height/2+120) {
-          respawn1 = false;
-          respawn2 = true;
-        }
-      }
-    } else if (respawn2) {
-      if (mouseX > 85 && mouseX < 160 && mouseY > height-80 && mouseY < height-50) {
+  if (playerIsDead) {
+
+    // If the user pressed the respawn button
+    if (mouseX > width/2-75 && mouseX < width/2+75) { 
+      if (mouseY > height/2-80 && mouseY < height/2) {
         player = new HumanSagar(sagars, mass);
         sagars.add(player);
-        respawn2 = false;
+        playerIsDead = false;
       }
+      if (mouseY > height/2+40 && mouseY < height/2+120) {
+        playerIsDead = false;
+        playerIsSpectating = true;
+      }
+    }
+  } 
+
+  // If the user is currently spectating
+  else if (playerIsSpectating) { 
+    if (mouseX > 85 && mouseX < 160 && mouseY > height-80 && mouseY < height-50) {
+      player = new HumanSagar(sagars, mass);
+      sagars.add(player);
+      playerIsSpectating = false;
     }
   }
 }
 
+
+// Update the status of each of the Sagars
+void updateSagars() {
+  for (Sagar s : sagars) s.update(); // Have each Sagar update its own values
+
+  // Eat edible things
+  ballConsumption(); 
+  massConsumption();
+
+  // Take care of the dead
+  deadSagarRemoval();
+  respawn();
+}
+
+
+// Update the status of each of the Masses
+void updateMasses() {
+  for (Mass m : mass) m.display();
+  spawnMass();
+}
+
+
+// Update the status of the leaderboard as well as player info
+void updateLeaderboard() {
+  leaderBoard();
+  playerStats();
+}
+
+
+// Check if any Balls ate any other Balls
 void ballConsumption() {
-  Iterator it = sagars.iterator();
-  Sagar tmp;
-  Sagar pmt;
-  Ball next;
-  Ball txen;
-  while (it.hasNext()) {
-    Iterator ti = sagars.iterator();
-    tmp = (Sagar)it.next();
-    while (ti.hasNext()) {
-      pmt = (Sagar)ti.next();
-      if (tmp != pmt) {
-        Iterator ball = tmp._balls.iterator();
-        while (ball.hasNext()) {
-          next = (Ball)ball.next();
-          Iterator llab = pmt._balls.iterator();
-          while (llab.hasNext()) {
-            txen = (Ball)llab.next();
-            if (next.consume(txen))
-              llab.remove();
+  Iterator it1 = sagars.iterator();
+  Sagar sagar1, sagar2;
+  Ball ballA, ballB;
+  while (it1.hasNext()) { // Iterate through the ArrayList of all sagars
+    Iterator it2 = sagars.iterator();
+    sagar1 = (Sagar) it1.next();
+    while (it2.hasNext()) {
+      sagar2 = (Sagar) it2.next();
+      if (sagar1 != sagar2) {
+        Iterator ballsIt1 = sagar1._balls.iterator(); // Iterate through the Balls of each sagar
+        while (ballsIt1.hasNext()) {
+          ballA = (Ball) ballsIt1.next();
+          Iterator ballsIt2 = sagar2._balls.iterator();
+          while (ballsIt2.hasNext()) {
+            ballB = (Ball) ballsIt2.next();
+            if (ballA.consume(ballB))
+              ballsIt2.remove();
           }
         }
       }
     }
   }
-  //for (Sagar s1 : sagars)
-  //  for (Sagar s2 : sagars)
-  //    if (s1 != s2)
-  //      for (Ball b1 : s1._balls)
-  //        for (Ball b2 : s2._balls)
-  //          b1.consume(b2);
 }
 
+
+// Check if any Balls ate any Masses
 void massConsumption() { 
   Iterator it = mass.iterator();
   while (it.hasNext()) {
@@ -116,25 +154,28 @@ void massConsumption() {
   }
 }
 
+
+// Remove the dead Sagars from the world
 void deadSagarRemoval() {
   Iterator it = sagars.iterator();
   while (it.hasNext()) {
     Sagar s = (Sagar) it.next();
     if (s._balls.size() == 0) { 
-      if (s == player) respawn1 = true;
+      if (s == player) playerIsDead = true;
       it.remove();
     }
   }
-  while (sagars.size() < 25) {
-    sagars.add(new AISagar(sagars, mass, AINum));
-    AINum++;
-  }
 }
 
+
+// Spawn new Masses as the world starts to run out
 void spawnMass() {
-  if (mass.size() > 350) return;
-  if (random(10) < 1 || mass.size() < 50) mass.add(new Mass());
+  if (mass.size() > 400) return;
+  if (random(10) < 1 || mass.size() < 100) mass.add(new Mass());
 }
+
+
+// Display the leaderboard
 void leaderBoard() {
   ArrayList<Sagar> orderedSagars = MergeSort.sort(sagars);
   int min = 0;
@@ -150,8 +191,10 @@ void leaderBoard() {
   }
 }
 
+
+// Check if the player wants to respawn, respawn AIs randomly
 void respawn() {
-  if (respawn1) {
+  if (playerIsDead) {
     fill(255);
     textSize(25);
     textAlign(CENTER, CENTER);
@@ -165,7 +208,7 @@ void respawn() {
     rect(width/2-75, height/2+40, 150, 80);
     fill(255);
     text("Spectate", width/2, height/2+80);
-  } else if (respawn2) {
+  } else if (playerIsSpectating) {
     fill(177);
     rect(85, height-80, 75, 30);
     textSize(14);
@@ -173,8 +216,15 @@ void respawn() {
     fill(255);
     text("Respawn", 125, height-65);
   }
+
+  if (sagars.size() < 25 && random(20) < 1) {
+    sagars.add(new AISagar(sagars, mass, AINum));
+    AINum++;
+  }
 }
 
+
+// Display the player's mass in the bottom right  
 void playerStats() {
   fill(255);
   textAlign(CENTER, CENTER);
