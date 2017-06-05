@@ -2,6 +2,7 @@ class AISnek extends Snek {
 
   Snek _target;
 
+  // Constructs a new AISnek
   AISnek(ArrayList<Snek> s, ArrayList<Mass> m, int i) {
     float r = random(50, 256);
     float g = random(50, 256);
@@ -20,6 +21,8 @@ class AISnek extends Snek {
     _name = "AI #" + i;
   }
 
+
+  // Used for displaying the data next to the Snek
   String toString() {
     String ret = "Name: " + _name; 
     ret += "\nNum Segments: " + _body.size();
@@ -29,17 +32,27 @@ class AISnek extends Snek {
     return ret;
   }
 
+
+  // Moves the Snek by popping the last element off the linked list and adding it to the front O(1)
   void move() {
     Segment oldFirst = _body.getFirst();
     targetClosest();
+    
+    // If there is no target, seek out small Masses
     if (_target == null && masses.size() != 0) {
       Mass toEat = targetMass();
       _heading = atan2(toEat.y - oldFirst.y, toEat.x - oldFirst.x) + random(-.15, .15);
       _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
-    } else if (inDanger){
-      _heading += random(-1.6, 1.6);
+    } 
+    
+    // If in danger of dying, turn
+    else if (inDanger){
+      _heading += random(0, .4);
       _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
-    } else {
+    } 
+    
+    // Otherwise seek out your target to kill
+    else {
       _heading = atan2((_target.y + sin(_target._heading) * 200) - oldFirst.y, (_target.x + cos(_target._heading) * 200) - oldFirst.x) + random(-.1, .1);
       _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
     }
@@ -48,6 +61,8 @@ class AISnek extends Snek {
     y = _body.peek().y;
   }
 
+
+  // Finds the closest Snek within a vision radius
   void targetClosest() {
     _target = null;
     float targetDist = 0;
@@ -61,6 +76,8 @@ class AISnek extends Snek {
     }
   }
 
+
+  // Returns the closest Mass
   Mass targetMass() {
     Mass closestMass = masses.get(0);
     float closestDist = dist(closestMass.x, closestMass.y, x, y);

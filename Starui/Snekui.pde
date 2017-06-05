@@ -7,9 +7,11 @@ class Snekui extends UI {
   boolean respawn1, respawn2;
 
   Snekui() {
-     setup(); 
+    setup();
   }
 
+
+  // Sets up the world
   void setup() {
     fullScreen();
     background(0);
@@ -21,21 +23,19 @@ class Snekui extends UI {
     for (AINum=0; AINum<10; AINum++) sneks.add(new AISnek(sneks, masses, AINum));
   }
 
+
+  // Main fucntion that is looped
   void draw() {
     background(0);
-    for (Snek s : sneks) s.update();
-    for (Mass m : masses) m.display();
-    deadSnekRemoval();
-    deadSneks();
-    massConsumption();
-    spawnMasses();
-    spawnSneks();
-    playerStats();
-    leaderBoard();
-    respawn();
+    updateSneks();
+    updateMasses();
+    updateLeaderboard();
   }
 
+
+  // Consumes length for a speed boost when the mouse is clicked
   void mousePressed() {
+    // Only attempt if the player is not dead
     if (player.exists) {
       if (player._body.size() > 6) {
         player.speed = 7;
@@ -44,7 +44,10 @@ class Snekui extends UI {
         player.speed = 4;
         player.degrade = false;
       }
-    } else {
+    } 
+    
+    // Otherwise check which button the player has pressed if they have pressed one
+    else {
       if (respawn1) {
         if (mouseX > width/2-75 && mouseX < width/2+75) { 
           if (mouseY > height/2-80 && mouseY < height/2) {
@@ -67,16 +70,47 @@ class Snekui extends UI {
     }
   }
 
+
+  // Slow the player back down when they let go of the mouse
   void mouseReleased() {
     player.speed = 4;
     player.degrade = false;
   }
 
+
+  // Updates Sneks, and takes care of respawn options
+  void updateSneks() {
+    for (Snek s : sneks) s.update();
+    deadSnekRemoval();
+    deadSneks();
+    spawnSneks();
+    respawn();
+  }
+
+
+  // Updates Masses
+  void updateMasses() {
+    for (Mass m : masses) m.display();
+    massConsumption();
+    spawnMasses();
+  }
+
+
+  // Updates leaderboard & player stats
+  void updateLeaderboard() {
+    playerStats();
+    leaderBoard();
+  }
+
+
+  // Spawns new Masses
   void spawnMasses() {
     if (masses.size() > 500) return;
     if (random(100) < 7 || masses.size() < 100) masses.add(new Mass());
   }
 
+
+  // Respawns dead AISneks
   void spawnSneks() {
     if (sneks.size() < 10 && random(100) < 2.5) {
       AINum++;
@@ -84,16 +118,20 @@ class Snekui extends UI {
     }
   }
 
+
+  // Consumes Masses
   void massConsumption() { 
     Iterator it = masses.iterator();
     while (it.hasNext()) {
       Mass m = (Mass) it.next();
       if (!m.exists) it.remove(); 
       for (Snek s : sneks) 
-        s.consume(m);
+      s.consume(m);
     }
   }
 
+
+  // Marks Sneks that have crashed for death
   void deadSneks() {
     ArrayList heads = new ArrayList<Segment>(), segments = new ArrayList<Segment>();
     Iterator allSneksIt = sneks.iterator();
@@ -116,7 +154,7 @@ class Snekui extends UI {
         if (currHead._parent != currSeg._parent) {
           float distFromSeg =  dist(currHead.x, currHead.y, currSeg.x, currSeg.y);
           if (distFromSeg < 50) 
-            currHead._parent.inDanger = true; // If near death, alert the Snek
+          currHead._parent.inDanger = true; // If near death, alert the Snek
           if (distFromSeg < 30) {
             currHead._parent.exists = false; // If the Snek has collided with another, alert it that it has died  
             break;
@@ -126,6 +164,8 @@ class Snekui extends UI {
     }
   }
 
+
+  // Removes the dead Sneks from the game
   void deadSnekRemoval() {
     Iterator snekIt = sneks.iterator();
     while (snekIt.hasNext()) {  // Iterates through all Sneks and removes the ones that should be dead
@@ -135,26 +175,30 @@ class Snekui extends UI {
         while (bodyIt.hasNext()) {
           Segment currSeg = (Segment) bodyIt.next(); 
           if (random(4) < 1)
-            masses.add(new Mass(currSeg.x, currSeg.y));
+          masses.add(new Mass(currSeg.x, currSeg.y));
         }
         if (currSnek == player)
-          respawn1 = true;
+        respawn1 = true;
         snekIt.remove();
       }
     }
   }
 
+
   void keyPressed() {
   }
+
 
   void mouseClicked() {
   }
 
+
+  // Displays the leaderboard
   void leaderBoard() {
     ArrayList<Snek> orderedSneks = MergeSortSnek.sort(sneks);
     int min = 0;
     if (orderedSneks.size() > 5)
-      min = orderedSneks.size() - 5;
+    min = orderedSneks.size() - 5;
     textSize(20);
     textAlign(TOP, RIGHT);
     fill(255);
@@ -165,6 +209,8 @@ class Snekui extends UI {
     }
   }
 
+
+  // Handles the respawn menu for the user
   void respawn() {
     if (respawn1) {
       fill(255);
@@ -190,6 +236,8 @@ class Snekui extends UI {
     }
   }
 
+
+  // Displays player stats
   void playerStats() {
     fill(255);
     textAlign(CENTER, CENTER);

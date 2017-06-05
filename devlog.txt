@@ -134,3 +134,24 @@ Adeebur Rahman: Started to mess with tank PShapes.
 Michael Ruvinshteyn: 
 Jake Zaia: "Overhaul" of sagarui AI.
 ==============================================================
+
+2017-06-02
+--------------------------------------------------------------
+Adeebur Rahman: 
+Michael Ruvinshteyn: 
+Jake Zaia: Slight modifications to Sagarui AI
+==============================================================
+
+2017-06-03
+--------------------------------------------------------------
+Adeebur Rahman: 
+Michael Ruvinshteyn: 
+Jake Zaia: Overhaul of Snekui AI, minor fixes within Sagarui
+==============================================================
+
+2017-06-04
+--------------------------------------------------------------
+Adeebur Rahman: 
+Michael Ruvinshteyn: 
+Jake Zaia: Began commenting up and reformatting all code
+==============================================================

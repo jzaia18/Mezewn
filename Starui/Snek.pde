@@ -10,6 +10,8 @@ abstract class Snek implements Comparable {
   boolean degrade, exists, inDanger;
   String _name;
 
+  
+  // Compares this Snek to another by length
   public int compareTo(Object o) {
     if (!(o instanceof Snek)) {
       throw new ClassCastException();
@@ -17,12 +19,16 @@ abstract class Snek implements Comparable {
     return _body.size() - ((Snek) o)._body.size();
   }
 
+
+  // Returns the smaller Snek between an input and itself
   Snek smallerSnek(Snek s) {
     if (compareTo(s) < 0) 
       return this;
     return s;
   }
 
+
+  // Displays the Snek
   void display() {
     for (Segment seg : _body) seg.display();
     textAlign(TOP, RIGHT);
@@ -32,6 +38,8 @@ abstract class Snek implements Comparable {
     //text(toString(), _body.getFirst().x+10, _body.getFirst().y);
   }
 
+
+  // Useful for showing Snek information
   String toString() {
     String ret = "Name: " + _name; 
     ret += "\nNum Segments: " + _body.size();
@@ -39,13 +47,19 @@ abstract class Snek implements Comparable {
     return ret += "\nExists: " + exists;
   }
 
+
+  // Update the Snek
   void update() {
     move();
     display();
   }
 
+
+  // To be implemented by Human/AI Snek
   abstract void move();
 
+
+  // Consume a small Mass
   void consume(Mass m) {
     Segment last = _body.getLast();
     if (dist(_body.getFirst().x, _body.getFirst().y, m.x, m.y) <= 15) {

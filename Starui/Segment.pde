@@ -4,6 +4,7 @@ class Segment {
   color _col; 
   Snek _parent;
 
+  // Constructs a new Segment
   Segment(Snek s, float xcor, float ycor) {
     _parent = s;
     _col = _parent._col;
@@ -11,14 +12,10 @@ class Segment {
     y = ycor;
   }
 
+  // Displays the Segment
   void display() {
     noStroke();
     fill(_col);
     ellipse(x, y, 30, 30);
   }
-  
-  /*
-  boolean inContactWith(Segment s) {
-    return dist(x, y, s.x, s.y) <= 30; 
-  }*/
 }
