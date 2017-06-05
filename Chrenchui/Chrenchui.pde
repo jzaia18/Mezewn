@@ -44,8 +44,14 @@ void keyReleased() {
 }
 
 void mousePressed() {
-  if (player.exists) 
+  if (player.exists){
     player.shooting = true;
+  }
+}
+
+void mouseReleased() {
+  if (player.exists)
+    player.shooting = false;
 }
 
 Shape randShape() {

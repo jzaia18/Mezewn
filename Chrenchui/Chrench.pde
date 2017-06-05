@@ -8,6 +8,8 @@ abstract class Chrench implements Comparable {
   int level, _score;
   color col;
   String _name;
+  double lastShot;
+  ALQueue<Bullet> shots;
 
   public int compareTo(Object o) {
     if (!(o instanceof Chrench)) {
@@ -19,6 +21,8 @@ abstract class Chrench implements Comparable {
   abstract void move();
 
   abstract void look();
+
+  abstract void shoot();
 
   void update() {
     move();

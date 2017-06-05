@@ -1,6 +1,7 @@
 class AIChrench extends Chrench {
 
   AIChrench(ArrayList<Chrench> c, ArrayList<Shape> s, int num) {
+    shots = new ALQueue<Bullet>();
     xPos = random(50, width - 50);
     yPos = random(50, height - 50);
     chrenchs = c;
@@ -26,6 +27,9 @@ class AIChrench extends Chrench {
   }
 
   void look() {
+  }
+  
+  void shoot(){
   }
   
 }

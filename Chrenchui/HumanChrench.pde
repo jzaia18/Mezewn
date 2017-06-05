@@ -1,7 +1,8 @@
 class HumanChrench extends Chrench {
 
- 
   HumanChrench(ArrayList<Chrench> c, ArrayList<Shape> s) {
+    shots = new ALQueue<Bullet>();
+    lastShot = -500;
     xPos = random(50, width - 50);
     yPos = random(50, height - 50);
     chrenchs = c;
@@ -31,16 +32,11 @@ class HumanChrench extends Chrench {
   }
 
   void look() {
-    //pushMatrix();
-    //heading = atan2(xPos - mouseX, yPos - mouseY);
-    //translate(xPos,yPos);
-    //rotate(-heading - HALF_PI);
-    //popMatrix();
     int index = tank.getChildIndex(gun);
     //remove gun to be replaced later
     tank.removeChild(index);
     heading = atan2(mouseY - yPos, mouseX - xPos);
-    /*make gun a PShape with four vertices made based on mouse angle (todo)*/
+    //make gun a PShape with four vertices made based on mouse angle
     float point1x, point1y, point2x, point2y, point3x, point3y, point4x, point4y;
     gun = createShape();
     gun.beginShape();
@@ -62,6 +58,11 @@ class HumanChrench extends Chrench {
     gun.setStroke(col);
     tank.addChild(gun);
   }
-
   
+  void shoot(){
+    if (shooting && System.currentTimeMillis() > 500 + lastShot){
+      shots.enqueue(new Bullet(this));
+      lastShot = System.currentTimeMillis();
+    }
+  }
 }
