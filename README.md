@@ -24,12 +24,8 @@ Still a work in progress, check back soon.
 ## How to run it
 Currently only Sagarui and Snekui are in working condition.
 
-### To run Sagarui:
-* ``` $ cd Sagarui```
-* ``` $ processing Sagarui.pde```
+### To run any of our games:
+* ``` $ cd Starui```
+* ``` $ processing Starui.pde```
 * Press play within processing
-
-### To run Snekui:
-* ``` $ cd Snekui```
-* ``` $ processing Snekui.pde```
-* Press play within processing
+* Follow the instructions within the program

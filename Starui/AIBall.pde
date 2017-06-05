@@ -2,8 +2,8 @@ class AIBall extends Ball {
 
   //needed for AIBalls only
   float dx, dy;
-  
-  
+
+
   // Constructs a new AIBall
   AIBall(Sagar s) {
     _mass = (int) random(6) + 7;
@@ -23,7 +23,6 @@ class AIBall extends Ball {
     _mass = mass;
   }
 
-
   // Allows one to specify the co-ordinates and mass of an AIBall
   AIBall(Sagar s, int mass, float xcor, float ycor) {
     this(s, mass);
@@ -35,31 +34,31 @@ class AIBall extends Ball {
   // Moves the AIBall
   void move() {
     float speed = 8 * pow(_mass, -0.439);
-       
+
     // If there is no target, seek out small Masses
     if (_parent.getTarget() == null && _parent.mass.size() != 0) { // There is no nearby Ball to eat
       Mass target = findNearestMass();
-      float direction = atan2(target.y - y, target.x - x) + random(-.1,.1);
+      float direction = atan2(target.y - y, target.x - x) + random(-.1, .1);
       x += speed * cos(direction);
       y += speed * sin(direction);
     } 
-    
+
     // If persuing a smaller Ball
     else if (_parent.chasingTarget) { 
       Ball target = _parent.getTarget();
-      float direction = atan2(target.y - y, target.x - x) + random(-.1,.1);
+      float direction = atan2(target.y - y, target.x - x) + random(-.1, .1);
       x += speed * cos(direction);
       y += speed * sin(direction);
     }
-    
+
     // If fleeing a larger Ball
     else { 
       Ball target = _parent.getTarget();
-      float direction = atan2(target.y - y, target.x - x) + random(-.1,.1);
+      float direction = atan2(target.y - y, target.x - x) + random(-.1, .1);
       x -= speed * cos(direction);
       y -= speed * sin(direction);
     }
-    
+
     // Prevent Balls from overshooting world boundaries
     if (x > width - 75)
       x = width - 75;
@@ -70,8 +69,8 @@ class AIBall extends Ball {
     if (y < 0)
       y = 0;
   }
-  
-  
+
+
   // Finds the closest Mass to this AIBall
   Mass findNearestMass() {
     Mass closestMass = _parent.mass.get(0);
@@ -106,6 +105,7 @@ class AIBall extends Ball {
         }
       }
     }
+
     _parent.setTarget(toTarget);
   }
 }

@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-public class MergeSort {
-  private static ArrayList<Sagarui.Sagar> merge( ArrayList<Sagarui.Sagar> a, ArrayList<Sagarui.Sagar> b ) {
+public class MergeSortSagar {
+  private static ArrayList<Starui.Sagar> merge( ArrayList<Starui.Sagar> a, ArrayList<Starui.Sagar> b ) {
     int curA = 0, curB = 0;
-    ArrayList<Sagarui.Sagar> retArr = new ArrayList<Sagarui.Sagar>();
+    ArrayList<Starui.Sagar> retArr = new ArrayList<Starui.Sagar>();
     while (curA < a.size() && curB < b.size()) {
       if (a.get(curA).compareTo(b.get(curB)) <= 0) {
         retArr.add(a.get(curA));
@@ -23,7 +23,7 @@ public class MergeSort {
     return retArr;
   }//end merge()
 
-  public static ArrayList sort( ArrayList<Sagarui.Sagar> arr ) {
+  public static ArrayList sort( ArrayList<Starui.Sagar> arr ) {
     if (arr.size() == 1) return arr;
     else {
       ArrayList firstHalf = new ArrayList(), otherHalf = new ArrayList();
