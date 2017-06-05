@@ -137,21 +137,27 @@ Jake Zaia: "Overhaul" of sagarui AI.
 
 2017-06-02
 --------------------------------------------------------------
-Adeebur Rahman: 
-Michael Ruvinshteyn: 
+Adeebur Rahman: Started HumanChrench 
+Michael Ruvinshteyn: Started HumanChrench 
 Jake Zaia: Slight modifications to Sagarui AI
 ==============================================================
 
 2017-06-03
 --------------------------------------------------------------
-Adeebur Rahman: 
-Michael Ruvinshteyn: 
+Adeebur Rahman: Planned out how to do gun rotation.
+Michael Ruvinshteyn: Started gun rotation.
 Jake Zaia: Overhaul of Snekui AI, minor fixes within Sagarui
 ==============================================================
 
 2017-06-04
 --------------------------------------------------------------
-Adeebur Rahman: 
+Adeebur Rahman: Leaderboards
+	Completed gun rotation (Fully Functional)
+	Player Respawn Mechanism
+	Prevented Player from Sitting Still (Snek)
+	Chrenchui Framework
+	Added a main menu
+	created a way to return to the main menu.
 Michael Ruvinshteyn: 
 Jake Zaia: Began commenting up and reformatting all code
 ==============================================================
