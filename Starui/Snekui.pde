@@ -202,10 +202,10 @@ class Snekui extends UI {
     textSize(20);
     textAlign(TOP, RIGHT);
     fill(255);
-    text("Top 5 Leader Board", width - 250, 30);
+    text("Top 5 Leader Board", width - 275, 30);
     for (int i = orderedSneks.size()-1; i >= min; i--) {
       Snek s = orderedSneks.get(i); 
-      text(s._name + ": " + s._body.size(), width - 250, 30 + 20 * (orderedSneks.size() - i));
+      text(s._name + ": " + s._body.size(), width - 275, 30 + 20 * (orderedSneks.size() - i));
     }
   }
 

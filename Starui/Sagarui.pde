@@ -195,10 +195,10 @@ class Sagarui extends UI {
     textSize(20);
     textAlign(TOP, LEFT);
     fill(255);
-    text("Top 5 Leader Board", width - 250, 30);
+    text("Top 5 Leader Board", width - 275, 30);
     for (int i = orderedSagars.size()-1; i >= min; i--) {
       Sagar s = orderedSagars.get(i); 
-      text(s._name + ": " + s._totalMass, width - 250, 30 + 20 * (orderedSagars.size() - i));
+      text(s._name + ": " + s._totalMass, width - 275, 30 + 20 * (orderedSagars.size() - i));
     }
   }
 

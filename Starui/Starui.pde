@@ -17,8 +17,8 @@ void draw() {
     background(0);
     imageMode(CENTER);
     image(sagar, 300, height/2);
-    image(snek, width-300, height/2);
-    image(sagar, width/2, height/2 + 325);
+    image(snek, width-375, height/2);
+    image(sagar, width/2, height/2 + 275);
     fill(128);
     rect(width/2-50, height/2-100, 100, 50);
     rect(width/2-50, height/2-40, 100, 50);
@@ -26,16 +26,17 @@ void draw() {
     rect(width/2-50, height/2+80, 100, 50);
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(15);
+    textSize(15);  
     text("Sagarui", width/2, height/2-75);
     text("Snekui", width/2, height/2-15);
     text("Chrenchui", width/2, height/2+45);
     text("Warui", width/2, height/2+105);
-    textSize(30);
+    textSize(100);
     text("Star.ui", width/2, 200);
+    textSize(30);
     text("Sagarui", 300, height/2+160);
     text("Snekui", width-300, height/2+160);
-    text("Chrenchui", width/2, height/2+475);
+    text("Chrenchui", width/2, height/2+400);
   } else if (!mainMenu && inGame && game != null) {
     game.draw();
     fill(128);
