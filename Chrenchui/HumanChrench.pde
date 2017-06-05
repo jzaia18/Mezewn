@@ -1,7 +1,7 @@
 class HumanChrench extends Chrench {
 
   HumanChrench(ArrayList<Chrench> c, ArrayList<Shape> s) {
-    shots = new ALQueue<Bullet>();
+    shots = new ConcurrentLinkedDeque<Bullet>();
     lastShot = -500;
     xPos = random(50, width - 50);
     yPos = random(50, height - 50);
@@ -22,6 +22,14 @@ class HumanChrench extends Chrench {
     _name = "Player";
     exists = true;
     _score = 10;
+    shooting = false;
+  }
+  
+  void update(){
+    move();
+    look();
+    shoot();
+    display();
   }
 
   void move() {
@@ -29,6 +37,9 @@ class HumanChrench extends Chrench {
     if (aP) xPos -= speed;
     if (sP) yPos += speed;
     if (dP) xPos += speed;
+    Iterator it = shots.iterator();
+    while (it.hasNext())
+      ((Bullet)it.next()).update();
   }
 
   void look() {
@@ -60,8 +71,8 @@ class HumanChrench extends Chrench {
   }
   
   void shoot(){
-    if (shooting && System.currentTimeMillis() > 500 + lastShot){
-      shots.enqueue(new Bullet(this));
+    if (shooting && System.currentTimeMillis() > 250 + lastShot){
+      shots.add(new Bullet(this));
       lastShot = System.currentTimeMillis();
     }
   }

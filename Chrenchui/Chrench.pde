@@ -1,3 +1,5 @@
+import java.util.concurrent.ConcurrentLinkedDeque;
+
 abstract class Chrench implements Comparable {
 
   ArrayList<Chrench> chrenchs; 
@@ -9,7 +11,7 @@ abstract class Chrench implements Comparable {
   color col;
   String _name;
   double lastShot;
-  ALQueue<Bullet> shots;
+  ConcurrentLinkedDeque<Bullet> shots;
 
   public int compareTo(Object o) {
     if (!(o instanceof Chrench)) {
