@@ -5,6 +5,7 @@ Chrench player;
 int AINum;
 boolean respawn1, respawn2;
 
+// Sets up the world
 void setup() {
   fullScreen();
   background(0);
@@ -16,6 +17,8 @@ void setup() {
   for (AINum=0; AINum<10; AINum++) chrenchs.add(new AIChrench(chrenchs, shapes, AINum));
 }
 
+
+// The main function that loops while game is in play
 void draw() {
   background(0);
   for (Chrench c : chrenchs) c.update();
@@ -26,6 +29,7 @@ void draw() {
 }
 
 
+// Used so that the user can move their Chrench
 void keyPressed() {
   if (player.exists) {
     if (Character.toLowerCase(key) == 'w') player.wP = true;
@@ -34,6 +38,9 @@ void keyPressed() {
     if (Character.toLowerCase(key) == 'd') player.dP = true;
   }
 }
+
+
+// Alerts the Chrench to stop moving
 void keyReleased() {
   if (player.exists) {
     if (Character.toLowerCase(key) == 'w') player.wP = false;
@@ -43,24 +50,32 @@ void keyReleased() {
   }
 }
 
+
+// Used to alert the Chrench to start firing
 void mousePressed() {
   if (player.exists){
     player.shooting = true;
   }
 }
 
+
+// Used to alert the Chrench to stop firing
 void mouseReleased() {
   if (player.exists)
     player.shooting = false;
 }
 
+
+// Generate a small random shape
 Shape randShape() {
   //int rand = (int) random(3);
   //if (rand == 0) return new Pentagon();
   //if (rand == 1) return new Triangle();
-  return new Square();
+  return new Triangle();
 }
 
+
+// Displays the leaderboard
 void leaderBoard() {
   ArrayList<Chrench> orderedChrenchs = MergeSort.sort(chrenchs);
   int min = 0;
@@ -76,6 +91,8 @@ void leaderBoard() {
   }
 }
 
+
+// Repspawns the user
 void respawn() {
   if (respawn1) {
     fill(255);
@@ -101,6 +118,8 @@ void respawn() {
   }
 }
 
+
+// Displays player stats in the bottom right corner
 void playerStats() {
   fill(255);
   textAlign(CENTER, CENTER);
