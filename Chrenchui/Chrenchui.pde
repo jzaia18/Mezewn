@@ -121,6 +121,7 @@ void leaderBoard() {
 
 // Repspawns the user
 void respawn() {
+  //respawns player
   if (respawn1) {
     fill(255);
     textSize(25);
@@ -142,6 +143,15 @@ void respawn() {
     textAlign(CENTER, CENTER);
     fill(255);
     text("Respawn", 125, height-65);
+  }
+  //respawns shapes
+  if (shapes.size() < 75){
+    shapes.add(randShape());
+  }
+  //respawns AIs
+  if (chrenchs.size() < 10){
+    chrenchs.add(new AIChrench(chrenchs, shapes,AINum));
+    AINum++;
   }
 }
 
