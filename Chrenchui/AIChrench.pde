@@ -35,6 +35,11 @@ class AIChrench extends Chrench {
     if (isFleeing) multiplier = -1;
     xPos += cos(heading) * speed * multiplier;
     yPos += sin(heading) * speed * multiplier;
+    //prevents AI from moving out of bounds
+    if (xPos > width) xPos = width;
+    if (xPos < 0) xPos = 0;
+    if (yPos > height) yPos = height;
+    if (yPos < 0) yPos = 0;
   }
 
   void look() {

@@ -161,3 +161,17 @@ Adeebur Rahman: Leaderboards
 Michael Ruvinshteyn: Began developing shooting concept for Chrenchui
 Jake Zaia: Began commenting up and reformatting all code
 ==============================================================
+
+2017-06-05
+--------------------------------------------------------------
+Adeebur Rahman: 
+Michael Ruvinshteyn: Finalized respawning for Chrenchui for AIs and shapes
+Jake Zaia: 
+==============================================================
+
+2017-06-06
+--------------------------------------------------------------
+Adeebur Rahman: 
+Michael Ruvinshteyn: Fixed moving out of bounds in Chrenchui
+Jake Zaia: 
+==============================================================

@@ -43,6 +43,11 @@ class HumanChrench extends Chrench {
     if (aP) xPos -= speed;
     if (sP) yPos += speed;
     if (dP) xPos += speed;
+    //prevents player from moving out of bounds
+    if (xPos > width) xPos = width;
+    if (xPos < 0) xPos = 0;
+    if (yPos > height) yPos = height;
+    if (yPos < 0) yPos = 0;
   }
 
   void look() {
