@@ -1,6 +1,7 @@
 class AIChrench extends Chrench {
 
   Chrench _target;
+  Boolean isFleeing;
 
   AIChrench(ArrayList<Chrench> c, ArrayList<Shape> s, int num) {
     shots = new ConcurrentLinkedDeque<Bullet>();
@@ -30,7 +31,10 @@ class AIChrench extends Chrench {
   }
 
   void move() {
-    //make it  
+    int multiplier = 1;
+    if (isFleeing) multiplier = -1;
+    xPos += cos(heading) * speed * multiplier;
+    yPos += sin(heading) * speed * multiplier;
   }
 
   void look() {
@@ -75,18 +79,31 @@ class AIChrench extends Chrench {
   // Finds the closest Chrench within a vision radius
   void targetClosest() {
     _target = null;
+    isFleeing = null;
     float targetDist = 0;
     for (Chrench checkChrench : chrenchs) {
+      for (Bullet b : checkChrench.shots) {
+        if (dist(b.xPos, b.yPos, xPos, yPos) < 125) {
+          _target = b._parent;
+          isFleeing = true;
+          return;
+        }
+      }
       float distFromCheck = dist(checkChrench.xPos, checkChrench.yPos, xPos, yPos);
       if ( distFromCheck < 220 && checkChrench != this && (_target == null || distFromCheck < targetDist)) {
         _target = checkChrench;
         targetDist = distFromCheck;
+        isFleeing = false;
+      } else if (distFromCheck < 110 && checkChrench != this) {
+        _target = checkChrench;
+        isFleeing = true;
       }
     }
   }
 
   // Returns the closest Shape
   Shape targetShape() {
+    isFleeing = false;
     Shape closestShape = shapes.get(0);
     float closestDist = dist(closestShape.vertices.get(0).x, closestShape.vertices.get(0).y, xPos, yPos);
     for (Shape s : shapes) {

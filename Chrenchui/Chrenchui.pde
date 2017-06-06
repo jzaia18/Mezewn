@@ -93,7 +93,7 @@ void mouseReleased() {
 // Generate a small random shape
 Shape randShape() {
   int rand = (int) random(100);
-  if (rand < 3) return new Square();
+  if (rand < 30) return new Square();
   else if (rand < 50) return new Triangle();
   else if (rand < 70) return new Pentagon();
   else if (rand < 80) return new Square(true);  
@@ -111,10 +111,10 @@ void leaderBoard() {
   textSize(20);
   textAlign(TOP, LEFT);
   fill(255);
-  text("Top 5 Leader Board", width - 250, 30);
+  text("Top 5 Leader Board", width - 275, 30);
   for (int i = orderedChrenchs.size()-1; i >= min; i--) {
     Chrench s = orderedChrenchs.get(i); 
-    text(s._name + ": " + s._score, width - 250, 30 + 20 * (orderedChrenchs.size() - i));
+    text(s._name + ": " + s._score, width - 275, 30 + 20 * (orderedChrenchs.size() - i));
   }
 }
 

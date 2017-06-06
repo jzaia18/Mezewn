@@ -27,8 +27,9 @@ abstract class Chrench implements Comparable {
   abstract void shoot();
 
   void update() {
-    move();
     look();
+    move();
+    doBodyDamage();
     shoot();
     display();
     updateBullets();
@@ -40,6 +41,15 @@ abstract class Chrench implements Comparable {
     textAlign(CENTER, CENTER);
     fill(255);
     text(_name + "\nHP: " + _health, xPos, yPos);
+  }
+  
+  void doBodyDamage() {
+   for (Chrench c: chrenchs) {
+     if (c != this && dist(c.xPos, c.yPos, xPos, yPos) < 95) {
+      _health -= 5;
+      c._health -=5;
+     }
+   }
   }
 
   void updateBullets() {
