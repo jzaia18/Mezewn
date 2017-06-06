@@ -56,10 +56,13 @@ class Bullet {
       boolean touching = false;
       if (dist(xPos, yPos, c.xPos, c.yPos) <= 35) {
         exists = false;
-        c._health -= _damage;
-        if (c._health == 0) {
-          _parent._score += c._score;
-          _parent.updatePoints();
+        if (c.lastHit + 500 < System.currentTimeMillis()) {
+          c._health -= _damage;
+          c.lastHit = System.currentTimeMillis();
+          if (c._health == 0) {
+            _parent._score += c._score;
+            _parent.updatePoints();
+          }
         }
       }
     }

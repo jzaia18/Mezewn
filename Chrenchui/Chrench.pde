@@ -11,6 +11,7 @@ abstract class Chrench implements Comparable {
   color col;
   String _name;
   double lastShot;
+  double lastHit = System.currentTimeMillis();
   ConcurrentLinkedDeque<Bullet> shots;
 
   public int compareTo(Object o) {
@@ -42,14 +43,24 @@ abstract class Chrench implements Comparable {
     fill(255);
     text(_name + "\nHP: " + _health, xPos, yPos);
   }
-  
+
   void doBodyDamage() {
-   for (Chrench c: chrenchs) {
-     if (c != this && dist(c.xPos, c.yPos, xPos, yPos) < 95) {
-      _health -= 5;
-      c._health -=5;
-     }
-   }
+    if (lastHit + 500 < System.currentTimeMillis()) {
+      for (Chrench c : chrenchs) {
+        if (c != this && dist(c.xPos, c.yPos, xPos, yPos) < 95) {
+          _health -= 5;
+          c._health -=5;
+          lastHit = System.currentTimeMillis();
+        }
+      }
+      for (Shape s : shapes) {
+        if (dist(s.vertices.get(0).x, s.vertices.get(0).y, xPos, yPos) < 95) {
+          _health -= 5;
+          s._health -=5;
+          lastHit = System.currentTimeMillis();
+        }
+      }
+    }
   }
 
   void updateBullets() {
@@ -60,7 +71,7 @@ abstract class Chrench implements Comparable {
       else b.update();
     }
   }
-  
+
   void updatePoints() {
     _points = _score / 100 - _pointsUsed;
   }
