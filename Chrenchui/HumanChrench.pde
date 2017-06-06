@@ -22,14 +22,20 @@ class HumanChrench extends Chrench {
     _name = "Player";
     exists = true;
     _score = 10;
-    shooting = false;
-  }
-  
-  void update(){
+    _health = _maxHealth = 100;
+    _bulletSpeed = 7;
+    _bulletDamage = 5;
+    _bulletReload = 250;
+    _points = 0;
+    _pointsUsed = 0;
+    }
+
+  void update() {
     move();
     look();
     shoot();
     display();
+    updateBullets();
   }
 
   void move() {
@@ -37,9 +43,6 @@ class HumanChrench extends Chrench {
     if (aP) xPos -= speed;
     if (sP) yPos += speed;
     if (dP) xPos += speed;
-    Iterator it = shots.iterator();
-    while (it.hasNext())
-      ((Bullet)it.next()).update();
   }
 
   void look() {
@@ -69,11 +72,14 @@ class HumanChrench extends Chrench {
     gun.setStroke(col);
     tank.addChild(gun);
   }
-  
-  void shoot(){
-    if (shooting && System.currentTimeMillis() > 250 + lastShot){
-      shots.add(new Bullet(this));
+
+  void shoot() {
+    if (shooting && System.currentTimeMillis() > _bulletReload + lastShot) {
+      shots.add(new Bullet(this, chrenchs, shapes));
       lastShot = System.currentTimeMillis();
     }
   }
+
+
+
 }

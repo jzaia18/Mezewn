@@ -13,7 +13,7 @@ void setup() {
   shapes = new ArrayList<Shape>();
   player = new HumanChrench(chrenchs, shapes);
   chrenchs.add(player);
-  for (int i=0; i<120; i++) shapes.add(randShape());
+  for (int i=0; i<75; i++) shapes.add(randShape());
   for (AINum=0; AINum<10; AINum++) chrenchs.add(new AIChrench(chrenchs, shapes, AINum));
 }
 
@@ -26,6 +26,8 @@ void draw() {
   playerStats();
   leaderBoard();
   respawn();
+  shapeRemoval();
+  chrenchRemoval();
 }
 
 
@@ -53,8 +55,30 @@ void keyReleased() {
 
 // Used to alert the Chrench to start firing
 void mousePressed() {
-  if (player.exists){
+  if (player._health > 0) {
     player.shooting = true;
+  }
+  // Otherwise check which button the player has pressed if they have pressed one
+  else {
+    if (respawn1) {
+      if (mouseX > width/2-75 && mouseX < width/2+75) { 
+        if (mouseY > height/2-80 && mouseY < height/2) {
+          player = new HumanChrench(chrenchs, shapes);
+          chrenchs.add(player);
+          respawn1 = false;
+        }
+        if (mouseY > height/2+40 && mouseY < height/2+120) {
+          respawn1 = false;
+          respawn2 = true;
+        }
+      }
+    } else if (respawn2) {
+      if (mouseX > 85 && mouseX < 160 && mouseY > height-80 && mouseY < height-50) {
+        player = new HumanChrench(chrenchs, shapes);
+        chrenchs.add(player);
+        respawn2 = false;
+      }
+    }
   }
 }
 
@@ -68,10 +92,13 @@ void mouseReleased() {
 
 // Generate a small random shape
 Shape randShape() {
-  //int rand = (int) random(3);
-  //if (rand == 0) return new Pentagon();
-  //if (rand == 1) return new Triangle();
-  return new Triangle();
+  int rand = (int) random(100);
+  if (rand < 3) return new Square();
+  else if (rand < 50) return new Triangle();
+  else if (rand < 70) return new Pentagon();
+  else if (rand < 80) return new Square(true);  
+  else if (rand < 95) return new Triangle(true);
+  else return new Pentagon(true);
 }
 
 
@@ -126,6 +153,26 @@ void playerStats() {
   textSize(20);
   text("Player Stats", 125, height-115);
   textSize(12);
-  if (player.exists) text("Score: " + player._score, 125, height-95);
-  else text("Mass: 0", 125, height-95);
+  if (player.exists) {
+    text("Score: " + player._score, 125, height-95);
+    text("Points: " + player._points, 125, height-85);
+  } else text("Mass: 0", 125, height-95);
+}
+
+void shapeRemoval() {
+  Iterator it = shapes.iterator();
+  while (it.hasNext()) {
+    if (((Shape) it.next())._health <= 0) it.remove();
+  }
+}
+
+void chrenchRemoval() {
+  Iterator it = chrenchs.iterator();
+  while (it.hasNext()) {
+    Chrench c = (Chrench) it.next();
+    if (c._health <= 0) {
+      if (c == player) respawn1 = true;
+      it.remove();
+    }
+  }
 }

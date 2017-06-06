@@ -1,8 +1,10 @@
 abstract class Shape {
-  
+
   PShape s;
-  float x, y;
+  ArrayList<PVector> vertices;
   color c;
-  
+  int _score, _health;
+
   abstract void display();
+
 }

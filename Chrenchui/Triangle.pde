@@ -1,18 +1,34 @@
 class Triangle extends Shape {
-  
+
   Triangle() {
-    x = random(width);
-    y = random(height);
-    c = color(random(50, 256), random(50, 256), random(50, 256));
+    c = color(255, 75, 75);
+    float heading = random(2*PI);
+    vertices = new ArrayList<PVector>();
+    vertices.add(new PVector(random(width), random(height)));
+    vertices.add(new PVector(vertices.get(0).x + 25*cos(heading), vertices.get(0).y + 25*sin(heading)));
+    vertices.add(new PVector(vertices.get(0).x + 25*cos(heading-PI/3), vertices.get(0).y + 25*sin(heading-PI/3)));
+    s = createShape();
+    s.beginShape();
+    for (PVector p : vertices) s.vertex(p.x, p.y);
+    s.endShape();
+    _score = 25;
+    _health = 15;
   }
 
+  Triangle(boolean shiny) {
+    this();
+    if (shiny) {
+      c = color(75, 255, 100);
+      _score = 200;
+      _health = 150;
+    }
+  }
 
   void display() {
-    fill(c);
-    noStroke();
-    float sidelength = 20; 
-    //.577 is 2/3 of the way down the altitude of an equilateral triangle
-    triangle(x, y - sidelength * .577, x - sidelength / 2, y + sidelength * .289, x + sidelength / 2, y + sidelength * .289);
+    s.setFill(c);
+    s.setStroke(c);
+    shape(s, 0, 0);
+    fill(255);
+    text(_health + "", vertices.get(0).x, vertices.get(0).y);
   }
-
 }

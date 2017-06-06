@@ -7,7 +7,7 @@ abstract class Chrench implements Comparable {
   PShape tank, body, gun;
   float xPos, yPos, speed, heading;
   boolean wP, aP, sP, dP, exists, shooting;
-  int level, _score;
+  int level, _score, _health, _maxHealth, _bulletSpeed, _bulletDamage, _bulletReload, _points, _pointsUsed;
   color col;
   String _name;
   double lastShot;
@@ -29,7 +29,9 @@ abstract class Chrench implements Comparable {
   void update() {
     move();
     look();
+    shoot();
     display();
+    updateBullets();
   }
 
   void display() {
@@ -37,6 +39,19 @@ abstract class Chrench implements Comparable {
     textSize(10);
     textAlign(CENTER, CENTER);
     fill(255);
-    text(_name, xPos, yPos);
+    text(_name + "\nHP: " + _health, xPos, yPos);
+  }
+
+  void updateBullets() {
+    Iterator it = shots.iterator();
+    while (it.hasNext()) {
+      Bullet b = (Bullet) it.next();
+      if (!b.exists) it.remove();
+      else b.update();
+    }
+  }
+  
+  void updatePoints() {
+    _points = _score / 100 - _pointsUsed;
   }
 }
