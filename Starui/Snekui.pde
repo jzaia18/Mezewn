@@ -4,16 +4,27 @@ class Snekui extends UI {
   ArrayList<Mass> masses;
   Snek player;
   int AINum;
-  boolean respawn1, respawn2;
+  boolean respawn1, respawn2, warui;
 
   Snekui() {
     setup();
   }
 
+  Snekui(boolean war) {
+    if (war) {
+      background(0);
+      sneks = new ArrayList<Snek>();
+      masses =  new ArrayList<Mass>();
+      player = new HumanSnek(sneks, masses);
+      sneks.add(player);
+      for (int i=0; i<250; i++) masses.add(new Mass());
+      for (AINum=0; AINum<10; AINum++) sneks.add(new BadAISnek(sneks, masses, AINum));
+      warui = war;
+    } else setup();
+  }
 
   // Sets up the world
   void setup() {
-    fullScreen();
     background(0);
     sneks = new ArrayList<Snek>();
     masses =  new ArrayList<Mass>();
@@ -45,7 +56,7 @@ class Snekui extends UI {
         player.degrade = false;
       }
     } 
-    
+
     // Otherwise check which button the player has pressed if they have pressed one
     else {
       if (respawn1) {
@@ -71,6 +82,9 @@ class Snekui extends UI {
   }
 
 
+  void keyReleased() {
+  }
+
   // Slow the player back down when they let go of the mouse
   void mouseReleased() {
     player.speed = 4;
@@ -80,9 +94,9 @@ class Snekui extends UI {
 
   // Updates Sneks, and takes care of respawn options
   void updateSneks() {
-    for (Snek s : sneks) s.update();
     deadSnekRemoval();
     deadSneks();
+    for (Snek s : sneks) s.update();
     spawnSneks();
     respawn();
   }
@@ -114,7 +128,8 @@ class Snekui extends UI {
   void spawnSneks() {
     if (sneks.size() < 10 && random(100) < 2.5) {
       AINum++;
-      sneks.add(new AISnek(sneks, masses, AINum));
+      if (warui) sneks.add(new BadAISnek(sneks, masses, AINum));
+      else sneks.add(new AISnek(sneks, masses, AINum));
     }
   }
 
@@ -126,7 +141,7 @@ class Snekui extends UI {
       Mass m = (Mass) it.next();
       if (!m.exists) it.remove(); 
       for (Snek s : sneks) 
-      s.consume(m);
+        s.consume(m);
     }
   }
 
@@ -154,7 +169,7 @@ class Snekui extends UI {
         if (currHead._parent != currSeg._parent) {
           float distFromSeg =  dist(currHead.x, currHead.y, currSeg.x, currSeg.y);
           if (distFromSeg < 50) 
-          currHead._parent.inDanger = true; // If near death, alert the Snek
+            currHead._parent.inDanger = true; // If near death, alert the Snek
           if (distFromSeg < 30) {
             currHead._parent.exists = false; // If the Snek has collided with another, alert it that it has died  
             break;
@@ -175,10 +190,10 @@ class Snekui extends UI {
         while (bodyIt.hasNext()) {
           Segment currSeg = (Segment) bodyIt.next(); 
           if (random(4) < 1)
-          masses.add(new Mass(currSeg.x, currSeg.y));
+            masses.add(new Mass(currSeg.x, currSeg.y));
         }
         if (currSnek == player)
-        respawn1 = true;
+          respawn1 = true;
         snekIt.remove();
       }
     }
@@ -198,7 +213,7 @@ class Snekui extends UI {
     ArrayList<Snek> orderedSneks = MergeSortSnek.sort(sneks);
     int min = 0;
     if (orderedSneks.size() > 5)
-    min = orderedSneks.size() - 5;
+      min = orderedSneks.size() - 5;
     textSize(20);
     textAlign(TOP, RIGHT);
     fill(255);

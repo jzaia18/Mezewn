@@ -5,7 +5,7 @@ class Sagarui extends UI {
   ArrayList<Mass> mass;
   Sagar player;
   int AINum;
-  boolean playerIsDead, playerIsSpectating;
+  boolean playerIsDead, playerIsSpectating, warui;
   final boolean debug = false; // Turn on for debug tools
 
   // Sets up the game
@@ -13,8 +13,20 @@ class Sagarui extends UI {
     setup();
   }
 
+  Sagarui(boolean war) {
+   if (war) {
+    background(0);
+    sagars = new ArrayList<Sagar>(); // All players in the game
+    mass = new ArrayList<Mass>(); // All small edible masses
+    player = new HumanSagar(sagars, mass); 
+    sagars.add(player);
+    for (int i=0; i<300; i++) mass.add(new Mass()); // Start the world with 300 small masses (True cap is 400)
+    for (AINum=0; AINum<25; AINum++) sagars.add(new AISagar(sagars, mass, AINum, war)); // There are always 25 players (Except when waiting for respawn)
+    warui = war;
+   } else setup();
+  }
+
   void setup() {
-    fullScreen();
     background(0);
     sagars = new ArrayList<Sagar>(); // All players in the game
     mass = new ArrayList<Mass>(); // All small edible masses
@@ -59,6 +71,9 @@ class Sagarui extends UI {
           mass.add(new Mass(b.x + 1.6 * b.rad * cos(direction), b.y + 1.6 * b.rad * sin(direction)));
         }
     }
+  }
+
+  void keyReleased() {
   }
 
 
@@ -229,7 +244,8 @@ class Sagarui extends UI {
     }
 
     if (sagars.size() < 25 && random(20) < 1) {
-      sagars.add(new AISagar(sagars, mass, AINum));
+      if (warui) sagars.add(new AISagar(sagars, mass, AINum, true));
+      else sagars.add(new AISagar(sagars, mass, AINum));
       AINum++;
     }
   }

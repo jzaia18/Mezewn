@@ -1,16 +1,31 @@
 class AISagar extends Sagar {
-  
+
   // Constructs a new AISagar
   AISagar(ArrayList<Sagar> s, ArrayList<Mass> m, int i) {
-    float r = random(50,256);
-    float g = random(50,256);
-    float b = random(50,256);
+    float r = random(50, 256);
+    float g = random(50, 256);
+    float b = random(50, 256);
     _col = color(r, g, b);
     sagars = s;
     mass = m;
     _balls = new PriorityQueue<Ball>();
     _balls.add(new AIBall(this, 10));
     _name = "AI #" + i;
+  }
+
+
+  AISagar(ArrayList<Sagar> s, ArrayList<Mass> m, int i, boolean war) {
+    if (war) {
+      float r = random(50, 256);
+      float g = random(50, 256);
+      float b = random(50, 256);
+      _col = color(r, g, b);
+      sagars = s;
+      mass = m;
+      _balls = new PriorityQueue<Ball>();
+      _balls.add(new BadAIBall(this, 10));
+      _name = "AI #" + i;
+    }
   }
 
 
@@ -26,10 +41,10 @@ class AISagar extends Sagar {
     }
     _balls = tmp;
   }
-  
-  
+
+
   // Asks the smallest Ball to decide what to target (This is good because the smallest Ball is the most afraid of getting eaten)
-  void targetClosest(){
+  void targetClosest() {
     ((AIBall) _balls.peek()).targetClosest(sagars);
   }
 }

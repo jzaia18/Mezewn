@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-public class MergeSort {
-  private static ArrayList<Chrenchui.Chrench> merge( ArrayList<Chrenchui.Chrench> a, ArrayList<Chrenchui.Chrench> b ) {
+public class MergeSortChrench {
+  private static ArrayList<Starui.Chrench> merge( ArrayList<Starui.Chrench> a, ArrayList<Starui.Chrench> b ) {
     int curA = 0, curB = 0;
-    ArrayList<Chrenchui.Chrench> retArr = new ArrayList<Chrenchui.Chrench>();
+    ArrayList<Starui.Chrench> retArr = new ArrayList<Starui.Chrench>();
     while (curA < a.size() && curB < b.size()) {
       if (a.get(curA).compareTo(b.get(curB)) <= 0) {
         retArr.add(a.get(curA));
@@ -23,7 +23,7 @@ public class MergeSort {
     return retArr;
   }//end merge()
 
-  public static ArrayList sort( ArrayList<Chrenchui.Chrench> arr ) {
+  public static ArrayList sort( ArrayList<Starui.Chrench> arr ) {
     if (arr.size() == 1 || arr.size() == 0) return arr;
     else {
       ArrayList firstHalf = new ArrayList(), otherHalf = new ArrayList();

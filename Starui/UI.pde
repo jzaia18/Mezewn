@@ -6,9 +6,11 @@ abstract class UI {
 
   abstract void keyPressed();
 
+  abstract void keyReleased();
+
   abstract void mouseClicked();
-  
+
   abstract void mousePressed();
-  
+
   abstract void mouseReleased();
 }

@@ -10,7 +10,7 @@ abstract class Snek implements Comparable {
   boolean degrade, exists, inDanger;
   String _name;
 
-  
+
   // Compares this Snek to another by length
   public int compareTo(Object o) {
     if (!(o instanceof Snek)) {
@@ -35,7 +35,6 @@ abstract class Snek implements Comparable {
     textSize(10);
     fill(255);
     text(_name, _body.getFirst().x+10, _body.getFirst().y);
-    //text(toString(), _body.getFirst().x+10, _body.getFirst().y);
   }
 
 
