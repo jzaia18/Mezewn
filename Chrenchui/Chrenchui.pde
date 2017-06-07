@@ -177,12 +177,13 @@ void playerStats() {
   if (player._health > 0) {
     text("Score: " + player._score, 125, height-95);
     text("Points: " + (player._points - player._pointsUsed), 125, height-85);
-    text("(1) Health Regen: Level " + player._healthLevel + "/" + player._maxLevel, 125, height-75);
-    text("(2) Body Damage: Level " + player._bodyDLevel + "/" + player._maxLevel, 125, height-65);
-    text("(3) Bullet Speed: Level " + player._bulletSLevel + "/" + player._maxLevel, 125, height-55);
-    text("(4) Bullet Damage: Level " + player._bulletDLevel + "/" + player._maxLevel, 125, height-45);
-    text("(5) Bullet Reload: Level " + player._bulletRLevel + "/" + player._maxLevel, 125, height-35);
-    text("(6) Movement Speed: Level " + player._speedLevel + "/" + player._maxLevel, 125, height-25);
+    text("HP: " + player._health, 125, height-75);
+    text("(1) Health Regen: Level " + player._healthLevel + "/" + player._maxLevel, 125, height-65);
+    text("(2) Body Damage: Level " + player._bodyDLevel + "/" + player._maxLevel, 125, height-55);
+    text("(3) Bullet Speed: Level " + player._bulletSLevel + "/" + player._maxLevel, 125, height-45);
+    text("(4) Bullet Damage: Level " + player._bulletDLevel + "/" + player._maxLevel, 125, height-35);
+    text("(5) Bullet Reload: Level " + player._bulletRLevel + "/" + player._maxLevel, 125, height-25);
+    text("(6) Movement Speed: Level " + player._speedLevel + "/" + player._maxLevel, 125, height-15);
   } else text("Score: 0", 125, height-95);
 }
 

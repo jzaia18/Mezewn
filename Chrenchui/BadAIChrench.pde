@@ -30,9 +30,11 @@ class BadAIChrench extends Chrench {
   }
 
   void move() {
+    //empty on purpose
   }
   
   void levelUp(){
+    //empty on purpose
   }
 
   void look() {

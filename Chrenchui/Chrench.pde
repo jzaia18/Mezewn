@@ -92,7 +92,7 @@ abstract class Chrench implements Comparable {
   }
 
   void regenHealth() {
-    if (frameCount % 60 == 0) {
+    if (frameCount % 150 == 0) {
       if (_health + _healthRegen < _maxHealth) _health += _healthRegen;        
       else _health = _maxHealth;
     }
