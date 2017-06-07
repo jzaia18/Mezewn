@@ -90,4 +90,5 @@ class AISnek extends Snek {
     }
     return closestMass;
   }
+  
 }

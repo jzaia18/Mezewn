@@ -5,7 +5,6 @@ class Mass {
   boolean exists;
   color _col;
 
-  // Create a new Mass
   Mass() {
     float r = random(50,256);
     float g = random(50,256);

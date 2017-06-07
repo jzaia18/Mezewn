@@ -3,6 +3,8 @@ PImage sagar, snek, chrench;
 ArrayList<Mass> mass;
 ArrayList<Shape> shapes;
 
+
+// Sets up the main menu
 void setup() {
   fullScreen();
   background(0);
@@ -18,6 +20,8 @@ void setup() {
   for (int i = 0; i < 75; i++) shapes.add(randShape());
 }
 
+
+// Loops the game selected
 void draw() {
   if (game == null) {
     //draws a main menu with buttons for each game
@@ -60,6 +64,8 @@ void draw() {
   }
 }
 
+
+// For determining which button the user pushed
 void mouseClicked() {
   if (game == null) {
     if (mouseX > width/2-50 && mouseX < width/2+50) {

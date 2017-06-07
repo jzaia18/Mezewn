@@ -4,7 +4,6 @@ class Segment {
   color _col; 
   Snek _parent;
 
-  // Constructs a new Segment
   Segment(Snek s, float xcor, float ycor) {
     _parent = s;
     _col = _parent._col;

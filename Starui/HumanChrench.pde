@@ -31,6 +31,8 @@ class HumanChrench extends Chrench {
     _points = _pointsUsed = _speedLevel = _healthLevel = _bulletSLevel = _bulletDLevel = _bulletRLevel = _healthRLevel = _bodyDLevel = 0;
   }
 
+
+  // Moves the Chrench
   void move() {
     if (wP) yPos -= speed;
     if (aP) xPos -= speed;
@@ -43,6 +45,8 @@ class HumanChrench extends Chrench {
     if (yPos < 0) yPos = 0;
   }
 
+
+  // Finds where the Chrench's gun should be aimed
   void look() {
     int index = tank.getChildIndex(gun);
     //remove gun to be replaced later
@@ -71,6 +75,8 @@ class HumanChrench extends Chrench {
     tank.addChild(gun);
   }
 
+
+  // Level up the Chrench
   void levelUp() {
     if (_points - _pointsUsed > 0) {
       if (oneP && _healthLevel < _maxLevel) {

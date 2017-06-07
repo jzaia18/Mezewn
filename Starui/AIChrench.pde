@@ -34,23 +34,29 @@ class AIChrench extends Chrench {
   }
 
 
-  //moves the Chrench 
+  // Moves the Chrench 
   void move() {
     int multiplier = 1;
-    //if chrench is being targetted, run
+
+    // If chrench is being targetted, run
     if (isFleeing) multiplier = -1;
-    //tank moves in the direction of its heading
+
+    // Moves in the direction of its heading
     xPos += cos(heading) * speed * multiplier;
     yPos += sin(heading) * speed * multiplier;
-    //prevents AI from moving out of bounds
+
+    // Prevents AI from moving out of bounds
     if (xPos > width) xPos = width;
     if (xPos < 0) xPos = 0;
     if (yPos > height) yPos = height;
     if (yPos < 0) yPos = 0;
   }
 
+
+  // Seek out a target
   void look() {
     targetClosest();
+
     // If there is no target, seek out shapes
     if (_target == null && shapes.size() != 0) {
       Shape toEat = targetShape();
@@ -82,12 +88,15 @@ class AIChrench extends Chrench {
     tank.addChild(gun);
   }
 
+
   // Finds the closest Chrench within a vision radius
   void targetClosest() {
     _target = null;
     isFleeing = null;
     float targetDist = 0;
     for (Chrench checkChrench : chrenchs) {
+      
+      // If a bullet is nearby, run
       for (Bullet b : checkChrench.shots) {
         if (dist(b.xPos, b.yPos, xPos, yPos) < 125) {
           _target = b._parent;
@@ -95,17 +104,25 @@ class AIChrench extends Chrench {
           return;
         }
       }
+      
+      // Look for Chrenchs
       float distFromCheck = dist(checkChrench.xPos, checkChrench.yPos, xPos, yPos);
+      
+      // If they're far away shoot them
       if ( distFromCheck < 220 && checkChrench != this && (_target == null || distFromCheck < targetDist)) {
         _target = checkChrench;
         targetDist = distFromCheck;
         isFleeing = false;
-      } else if (distFromCheck < 110 && checkChrench != this) {
+      } 
+      
+      // If they're close, move to avoid collision damage
+      else if (distFromCheck < 110 && checkChrench != this) {
         _target = checkChrench;
         isFleeing = true;
       }
     }
   }
+
 
   // Returns the closest Shape
   Shape targetShape() {
@@ -122,6 +139,8 @@ class AIChrench extends Chrench {
     return closestShape;
   }
 
+
+  // Levels up a Chrench
   void levelUp() {
     //AI chrenchs have no game sense in terms of leveling up, do it randomly
     if (_points - _pointsUsed > 0) {

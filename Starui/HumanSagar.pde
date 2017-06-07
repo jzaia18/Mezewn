@@ -1,6 +1,5 @@
 class HumanSagar extends Sagar {
 
-  // Construct a new HumanSagar
   HumanSagar(ArrayList<Sagar> s, ArrayList<Mass> m) {
     float r = random(50, 256);
     float g = random(50, 256);

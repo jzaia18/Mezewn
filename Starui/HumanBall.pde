@@ -1,6 +1,5 @@
 class HumanBall extends Ball {
 
-  // Constructs a HumanBall
   HumanBall(Sagar s) {
     _mass = 10;
     float r = random(256);

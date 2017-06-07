@@ -20,24 +20,34 @@ class Bullet {
     exists = true;
   }
 
+
+  // Moves the Bullet
   void move() {
     xPos += _speed * cos(heading);
     yPos += _speed * sin(heading);
     if (xPos < 0 || xPos > width || yPos < 0 || yPos > height) exists = false;
   }
 
+
+  // Displays the Bullet
   void display() {
     fill(_parent.col);
     ellipse(xPos, yPos, 20, 20);
   }
 
+
+  // Updates all info regarding the Bullet
   void update() {
     move();
     display();
     hittingShapes();
   }
 
+
+  // Deal damage upon collision with an object
   void hittingShapes() {
+    
+    // If hit a shape
     for (Shape s : shapes) {
       boolean touching = false;
       for (PVector p : s.vertices) 
@@ -49,6 +59,8 @@ class Bullet {
         if (s._health <= 0) _parent._score += s._score;
       }
     }
+    
+    // If hit a Chrench
     for (Chrench c : chrenchs) {
       boolean touching = false;
       if (dist(xPos, yPos, c.xPos, c.yPos) <= 25) {

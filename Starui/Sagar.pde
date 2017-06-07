@@ -68,6 +68,7 @@ abstract class Sagar implements Comparable {
   void merge(HumanBall b1, HumanBall b2){}
   void targetClosest() {}
 
+
   // Accessors
   int getMass() { return _totalMass; }
   float getDistFrom(float ox, float oy) { return _balls.peek().getDistFrom(ox, oy); }

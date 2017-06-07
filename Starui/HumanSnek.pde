@@ -1,7 +1,5 @@
 class HumanSnek extends Snek {
 
-  
-  // Constructs a new Human Snek
   HumanSnek(ArrayList<Snek> s, ArrayList<Mass> m) {
     float r = random(50, 256);
     float g = random(50, 256);

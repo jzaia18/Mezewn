@@ -5,7 +5,6 @@ abstract class Ball implements Comparable {
   int _mass;
   Sagar _parent; // Important for keeping track of bretheren
 
-
   // Returns whether or not this Ball is larger
   public int compareTo(Object o) {
     if (!(o instanceof Ball)) throw new ClassCastException(); // This should never happen

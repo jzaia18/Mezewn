@@ -14,6 +14,7 @@ abstract class Chrench implements Comparable {
   double lastHit = System.currentTimeMillis();
   ConcurrentLinkedDeque<Bullet> shots;
 
+  // Compares Chrenchs based on score (for scoreboard)
   public int compareTo(Object o) {
     if (!(o instanceof Chrench)) {
       throw new ClassCastException();
@@ -21,12 +22,13 @@ abstract class Chrench implements Comparable {
     return _score - ((Chrench) o)._score;
   }
 
+  // Implemened differently by AI/Human
   abstract void move();
-
   abstract void look();
-
   abstract void levelUp();
 
+
+  // Update all Chrench variables
   void update() {
     look();
     move();
@@ -39,6 +41,8 @@ abstract class Chrench implements Comparable {
     updatePoints();
   }
 
+
+  // Display the Chrench
   void display() {
     shape(tank, xPos, yPos);
     textSize(10);
@@ -47,6 +51,8 @@ abstract class Chrench implements Comparable {
     text(_name + "\nHP: " + _health, xPos, yPos);
   }
 
+
+  // Fire a Bullet
   void shoot() {
     if (shooting && System.currentTimeMillis() > _bulletReload + lastShot) {
       shots.add(new Bullet(this, chrenchs, shapes));
@@ -54,8 +60,13 @@ abstract class Chrench implements Comparable {
     }
   }
 
+
+  // Collision damage
   void doBodyDamage() {
+    //invincibility frames
     if (lastHit + 500 < System.currentTimeMillis()) {
+      
+      // If collided with a Chrench
       for (Chrench c : chrenchs) {
         if (c != this && dist(c.xPos, c.yPos, xPos, yPos) < 95) {
           c._health -= _bodyDamage;
@@ -63,6 +74,8 @@ abstract class Chrench implements Comparable {
           lastHit = System.currentTimeMillis();
         }
       }
+      
+      // If collided with a Shape
       for (Shape s : shapes) {
         boolean touching = false;
         for (PVector p : s.vertices)
@@ -78,6 +91,8 @@ abstract class Chrench implements Comparable {
     }
   }
 
+
+  // Update all Bullets fired
   void updateBullets() {
     Iterator it = shots.iterator();
     while (it.hasNext()) {
@@ -87,10 +102,14 @@ abstract class Chrench implements Comparable {
     }
   }
 
+
+  // Adjust score
   void updatePoints() {
     _points = _score / 100;
   }
 
+
+  // Regen health slowly
   void regenHealth() {
     if (frameCount % 150 == 0) {
       if (_health + _healthRegen < _maxHealth) _health += _healthRegen;        

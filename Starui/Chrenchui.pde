@@ -117,10 +117,9 @@ class Chrenchui extends UI {
     if (player._health > 0)
       player.shooting = false;
   }
-
-  void mouseClicked() {
-  }
-
+  
+  void mouseClicked() {}
+  
 
   // Generate a small random shape
   Shape randShape() {
@@ -209,6 +208,8 @@ class Chrenchui extends UI {
     } else text("Score: 0", 125, height-95);
   }
 
+
+  // Remove dead Shapes
   void shapeRemoval() {
     Iterator it = shapes.iterator();
     while (it.hasNext()) {
@@ -216,6 +217,8 @@ class Chrenchui extends UI {
     }
   }
 
+
+  // Remove dead Chrenchs
   void chrenchRemoval() {
     Iterator it = chrenchs.iterator();
     while (it.hasNext()) {

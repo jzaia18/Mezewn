@@ -105,7 +105,6 @@ class AIBall extends Ball {
         }
       }
     }
-
     _parent.setTarget(toTarget);
   }
 }
