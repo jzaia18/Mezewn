@@ -14,10 +14,13 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ConcurrentModificationException's
+   fixed by using iterators, that didn't overlap with itself
 AI Problems
    AI refused to move
    AI moved back and forth
+   fixed by formulating movement ideas and then replicating them via simple instructions
 Intial Player Movement (Sagarui)
+   Once AI was done, we balanced player movement accordingly
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 UNRESOLVED ISSUES
