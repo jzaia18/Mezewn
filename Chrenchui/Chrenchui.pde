@@ -68,7 +68,6 @@ void keyReleased() {
 void mousePressed() {
   if (player._health > 0) {
     player.shooting = true;
-    print(player.shooting);
   }
   // Otherwise check which button the player has pressed if they have pressed one
   else {
@@ -178,12 +177,12 @@ void playerStats() {
   if (player._health > 0) {
     text("Score: " + player._score, 125, height-95);
     text("Points: " + (player._points - player._pointsUsed), 125, height-85);
-    text("Health Regen: Level " + player._healthLevel + "/" + player._maxLevel, 125, height-75);
-    text("Body Damage: Level " + player._bodyDLevel + "/" + player._maxLevel, 125, height-65);
-    text("Bullet Speed: Level " + player._bulletSLevel + "/" + player._maxLevel, 125, height-55);
-    text("Bullet Damage: Level " + player._bulletDLevel + "/" + player._maxLevel, 125, height-45);
-    text("Bullet Reload: Level " + player._bulletRLevel + "/" + player._maxLevel, 125, height-35);
-    text("Movement Speed: Level " + player._speedLevel + "/" + player._maxLevel, 125, height-25);
+    text("(1) Health Regen: Level " + player._healthLevel + "/" + player._maxLevel, 125, height-75);
+    text("(2) Body Damage: Level " + player._bodyDLevel + "/" + player._maxLevel, 125, height-65);
+    text("(3) Bullet Speed: Level " + player._bulletSLevel + "/" + player._maxLevel, 125, height-55);
+    text("(4) Bullet Damage: Level " + player._bulletDLevel + "/" + player._maxLevel, 125, height-45);
+    text("(5) Bullet Reload: Level " + player._bulletRLevel + "/" + player._maxLevel, 125, height-35);
+    text("(6) Movement Speed: Level " + player._speedLevel + "/" + player._maxLevel, 125, height-25);
   } else text("Score: 0", 125, height-95);
 }
 

@@ -36,6 +36,7 @@ abstract class Chrench implements Comparable {
     updateBullets();
     regenHealth();
     levelUp();
+    updatePoints();
   }
 
   void display() {
@@ -58,10 +59,7 @@ abstract class Chrench implements Comparable {
       for (Chrench c : chrenchs) {
         if (c != this && dist(c.xPos, c.yPos, xPos, yPos) < 95) {
           c._health -= _bodyDamage;
-          if (c._health <= 0) {
-            _score += c._score;
-            updatePoints();
-          }
+          if (c._health <= 0) _score += c._score;
           lastHit = System.currentTimeMillis();
         }
       }
@@ -73,10 +71,7 @@ abstract class Chrench implements Comparable {
         if (touching) {
           _health -= 5;
           s._health -= _bodyDamage;
-          if (s._health <= 0) {
-            updatePoints();
-            _score += s._score;
-          }
+          if (s._health <= 0) _score += s._score;
           lastHit = System.currentTimeMillis();
         }
       }
