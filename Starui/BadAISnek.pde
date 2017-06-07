@@ -36,6 +36,7 @@ class BadAISnek extends Snek {
   // Moves the Snek by popping the last element off the linked list and adding it to the front O(1)
   void move() {
     Segment oldFirst = _body.getFirst();
+    //warui AISneks go in a random direction making them difficult to target
     _heading = random(-TWO_PI, TWO_PI);
     _body.addFirst(new Segment(this, oldFirst.x + speed * cos(_heading), oldFirst.y + speed * sin(_heading)));
     _body.removeLast();

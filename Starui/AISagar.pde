@@ -13,7 +13,7 @@ class AISagar extends Sagar {
     _name = "AI #" + i;
   }
 
-
+  //Sagars for warui gamemode have BadAI's
   AISagar(ArrayList<Sagar> s, ArrayList<Mass> m, int i, boolean war) {
     if (war) {
       float r = random(50, 256);

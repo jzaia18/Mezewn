@@ -26,7 +26,7 @@ class BadAIBall extends AIBall {
   }
 
 
-  // Moves the AIBall
+  // Moves the AIBall in a random direction
   void move() {
     int speed = 5;
     float direction = random(-TWO_PI, TWO_PI);

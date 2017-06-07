@@ -3,6 +3,7 @@ class AIChrench extends Chrench {
   Chrench _target;
   Boolean isFleeing;
 
+  // Constructs a new AIChrench
   AIChrench(ArrayList<Chrench> c, ArrayList<Shape> s, int num) {
     shots = new ConcurrentLinkedDeque<Bullet>();
     xPos = random(50, width - 50);
@@ -32,9 +33,13 @@ class AIChrench extends Chrench {
     _points = _pointsUsed = _healthLevel = _bulletSLevel = _bulletDLevel = _bulletRLevel = _healthRLevel = _bodyDLevel = 0;
   }
 
+
+  //moves the Chrench 
   void move() {
     int multiplier = 1;
+    //if chrench is being targetted, run
     if (isFleeing) multiplier = -1;
+    //tank moves in the direction of its heading
     xPos += cos(heading) * speed * multiplier;
     yPos += sin(heading) * speed * multiplier;
     //prevents AI from moving out of bounds
@@ -57,6 +62,7 @@ class AIChrench extends Chrench {
     float point1x, point1y, point2x, point2y, point3x, point3y, point4x, point4y;
     gun = createShape();
     gun.beginShape();
+    //corners of the gun portion of the tank
     point1x = 12.5*cos(heading)+12.5*cos(heading-radians(90));
     point1y = 12.5*sin(heading)+12.5*sin(heading-radians(90));
     point2x = point1x + 30*cos(heading);
@@ -117,6 +123,7 @@ class AIChrench extends Chrench {
   }
 
   void levelUp() {
+    //AI chrenchs have no game sense in terms of leveling up, do it randomly
     if (_points - _pointsUsed > 0) {
       int rand = (int) random(6);
       if (rand == 0 && _healthLevel < _maxLevel) {

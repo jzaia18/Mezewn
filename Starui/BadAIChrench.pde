@@ -2,6 +2,7 @@ class BadAIChrench extends Chrench {
 
   Chrench _target;
 
+  // Constructs a new AIChrench
   BadAIChrench(ArrayList<Chrench> c, ArrayList<Shape> s, int num) {
     shots = new ConcurrentLinkedDeque<Bullet>();
     xPos = random(50, width - 50);
@@ -29,13 +30,16 @@ class BadAIChrench extends Chrench {
     shooting = true;
   }
 
+  //warui chrenchs don't move only shoot
   void move() {
     //empty on purpose
   }
-  
-  void levelUp(){
+
+  //warui chrenchs don't know how to level up
+  void levelUp() {
     //empty on purpose
   }
+
 
   void look() {
     targetClosest();
@@ -50,6 +54,7 @@ class BadAIChrench extends Chrench {
     float point1x, point1y, point2x, point2y, point3x, point3y, point4x, point4y;
     gun = createShape();
     gun.beginShape();
+    //corners for the gun portion of the tank
     point1x = 12.5*cos(heading)+12.5*cos(heading-radians(90));
     point1y = 12.5*sin(heading)+12.5*sin(heading-radians(90));
     point2x = point1x + 30*cos(heading);

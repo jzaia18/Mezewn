@@ -5,7 +5,7 @@ class Chrenchui extends UI {
   ArrayList<Shape> shapes;
   HumanChrench player;
   int AINum;
-  boolean respawn1, respawn2, warui;
+  boolean playerIsDead, playerIsSpectating, warui;
 
   Chrenchui() {
     setup();
@@ -89,23 +89,23 @@ class Chrenchui extends UI {
     }
     // Otherwise check which button the player has pressed if they have pressed one
     else {
-      if (respawn1) {
+      if (playerIsDead) {
         if (mouseX > width/2-75 && mouseX < width/2+75) { 
           if (mouseY > height/2-80 && mouseY < height/2) {
             player = new HumanChrench(chrenchs, shapes);
             chrenchs.add(player);
-            respawn1 = false;
+            playerIsDead = false;
           }
           if (mouseY > height/2+40 && mouseY < height/2+120) {
-            respawn1 = false;
-            respawn2 = true;
+            playerIsDead = false;
+            playerIsSpectating = true;
           }
         }
-      } else if (respawn2) {
+      } else if (playerIsSpectating) {
         if (mouseX > 85 && mouseX < 160 && mouseY > height-80 && mouseY < height-50) {
           player = new HumanChrench(chrenchs, shapes);
           chrenchs.add(player);
-          respawn2 = false;
+          playerIsSpectating = false;
         }
       }
     }
@@ -154,7 +154,7 @@ class Chrenchui extends UI {
   // Repspawns the user
   void respawn() {
     //respawns player
-    if (respawn1) {
+    if (playerIsDead) {
       fill(255);
       textSize(25);
       textAlign(CENTER, CENTER);
@@ -168,7 +168,7 @@ class Chrenchui extends UI {
       rect(width/2-75, height/2+40, 150, 80);
       fill(255);
       text("Spectate", width/2, height/2+80);
-    } else if (respawn2) {
+    } else if (playerIsSpectating) {
       fill(177);
       rect(85, height-80, 75, 30);
       textSize(14);
@@ -221,7 +221,7 @@ class Chrenchui extends UI {
     while (it.hasNext()) {
       Chrench c = (Chrench) it.next();
       if (c._health <= 0) {
-        if (c == player) respawn1 = true;
+        if (c == player) playerIsDead = true;
         it.remove();
       }
     }

@@ -4,7 +4,7 @@ class Snekui extends UI {
   ArrayList<Mass> masses;
   Snek player;
   int AINum;
-  boolean respawn1, respawn2, warui;
+  boolean playerIsDead, playerIsSpectating, warui;
 
   Snekui() {
     setup();
@@ -59,23 +59,23 @@ class Snekui extends UI {
 
     // Otherwise check which button the player has pressed if they have pressed one
     else {
-      if (respawn1) {
+      if (playerIsDead) {
         if (mouseX > width/2-75 && mouseX < width/2+75) { 
           if (mouseY > height/2-80 && mouseY < height/2) {
             player = new HumanSnek(sneks, masses);
             sneks.add(player);
-            respawn1 = false;
+            playerIsDead = false;
           }
           if (mouseY > height/2+40 && mouseY < height/2+120) {
-            respawn1 = false;
-            respawn2 = true;
+            playerIsDead = false;
+            playerIsSpectating = true;
           }
         }
-      } else if (respawn2) {
+      } else if (playerIsSpectating) {
         if (mouseX > 85 && mouseX < 160 && mouseY > height-80 && mouseY < height-50) {
           player = new HumanSnek(sneks, masses);
           sneks.add(player);
-          respawn2 = false;
+          playerIsSpectating = false;
         }
       }
     }
@@ -193,7 +193,7 @@ class Snekui extends UI {
             masses.add(new Mass(currSeg.x, currSeg.y));
         }
         if (currSnek == player)
-          respawn1 = true;
+          playerIsDead = true;
         snekIt.remove();
       }
     }
@@ -227,7 +227,7 @@ class Snekui extends UI {
 
   // Handles the respawn menu for the user
   void respawn() {
-    if (respawn1) {
+    if (playerIsDead) {
       fill(255);
       textSize(25);
       textAlign(CENTER, CENTER);
@@ -241,7 +241,7 @@ class Snekui extends UI {
       rect(width/2-75, height/2+40, 150, 80);
       fill(255);
       text("Spectate", width/2, height/2+80);
-    } else if (respawn2) {
+    } else if (playerIsSpectating) {
       fill(177);
       rect(85, height-80, 75, 30);
       textSize(14);

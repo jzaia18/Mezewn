@@ -4,40 +4,50 @@ Michael Ruvinshteyn
 Jake Zaia
 pd 01
 ------------------------------------------
-*,ui
+*.ui
 ------------------------------------------
 
 ------------------------------------------
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
 OBSTACLES OVERCOME
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ** Stuff here **
+ConcurrentModificationException's
+AI Problems
+   AI refused to move
+   AI moved back and forth
+Intial Player Movement (Sagarui)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ** Stuff here **
+AI isn't good enough
+   Jittery AI for Snekui and Chrenchui
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ** Stuff here **
+AI should never be implemented in the real agar.io
+   would be too overpowered
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ** Stuff here **
+We dropped marui
+   was never going to happen due to time constraints
+Drop chrench leveling up
+   in place we added leveling of stats
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- ** Stuff here **
+Don't tackle several projects at the same time.
+Don't try to do four projects at the same time.
 
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ==============================================================
@@ -76,7 +86,7 @@ Jake Zaia: Finished UML for Sagarui
 All: Revised plans once again
 Adeebur Rahman: Updated UML
 Michael Ruvinshteyn: Minor edits; Helped Jake implement AI 
-	movement; Added plan/20170523
+     movement; Added plan/20170523
 Jake Zaia: Incorporated AI movement (is still very buggy)
 ==============================================================
 
@@ -99,8 +109,8 @@ Jake Zaia: Fixed bugs involving splitting, incorperated
 2017-05-25
 --------------------------------------------------------------
 Adeebur Rahman: Fixed some ConcurrentModificationExceptions
-	Added basic spit() for debugging
-	Added Snekui framework.
+     Added basic spit() for debugging
+     Added Snekui framework.
 Michael Ruvinshteyn: Fixed some ConcurrentModificationExceptions
 Jake Zaia: Worked on snek uml
 ==============================================================
@@ -152,26 +162,44 @@ Jake Zaia: Overhaul of Snekui AI, minor fixes within Sagarui
 2017-06-04
 --------------------------------------------------------------
 Adeebur Rahman: Leaderboards
-	Completed gun rotation (Fully Functional)
-	Player Respawn Mechanism
-	Prevented Player from Sitting Still (Snek)
-	Chrenchui Framework
-	Added a main menu
-	created a way to return to the main menu.
+     Completed gun rotation (Fully Functional)
+     Player Respawn Mechanism
+     Prevented Player from Sitting Still (Snek)
+     Chrenchui Framework
+     Added a main menu
+     created a way to return to the main menu.
 Michael Ruvinshteyn: Began developing shooting concept for Chrenchui
 Jake Zaia: Began commenting up and reformatting all code
 ==============================================================
 
 2017-06-05
 --------------------------------------------------------------
-Adeebur Rahman: 
+Adeebur Rahman: AIChrench aiming and shooting
+     Better Chrench Triangles
+     Better Chrench Squares
+     Main Menu Modifications
 Michael Ruvinshteyn: Finalized respawning for Chrenchui for AIs and shapes
-Jake Zaia: 
+Jake Zaia: COMMENTS
+     intitial triangles
 ==============================================================
 
 2017-06-06
 --------------------------------------------------------------
-Adeebur Rahman: 
+Adeebur Rahman: Chrench stat upgrades
+     WAAAAA WAAA WA WARUI
+     Chrench Pentagons
+     More main menu modifications
+     Worked on AIChrench movement
+     Worked on Chrench body damage
+     devlog finalizations 
 Michael Ruvinshteyn: Fixed moving out of bounds in Chrenchui
-Jake Zaia: 
+     Worked on AIChrench movement
+     Worked on Chrench body damage
+     helped finalize devlog
+Jake Zaia: Worked on AIChrench
+     Worked on Chrench body damage
+     UML & flow finalizations
+     readme finalizations
+     helped finalize devlog
+     COMMENTS
 ==============================================================
