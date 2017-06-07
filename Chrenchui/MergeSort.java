@@ -24,7 +24,7 @@ public class MergeSort {
   }//end merge()
 
   public static ArrayList sort( ArrayList<Chrenchui.Chrench> arr ) {
-    if (arr.size() == 1) return arr;
+    if (arr.size() == 1 || arr.size() == 0) return arr;
     else {
       ArrayList firstHalf = new ArrayList(), otherHalf = new ArrayList();
       for (int i = 0; i<arr.size()/2; i++)

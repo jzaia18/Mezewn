@@ -22,12 +22,14 @@ class AIChrench extends Chrench {
     gun.setStroke(col);
     _name = "AI #" + num;
     heading = 0;
-    exists = true;
     _score = 10;
-    _health = 100;
+    _health = _maxHealth = 100;
+    _healthRegen = 1;
     _bulletSpeed = 7;
     _bulletReload = 250;
-    _bulletDamage = 5;
+    _bulletDamage = _bodyDamage = _maxLevel = 5;
+    shooting = true;
+    _points = _pointsUsed = _healthLevel = _bulletSLevel = _bulletDLevel = _bulletRLevel = _healthRLevel = _bodyDLevel = 0;
   }
 
   void move() {
@@ -74,13 +76,6 @@ class AIChrench extends Chrench {
     tank.addChild(gun);
   }
 
-  void shoot() {
-    if (System.currentTimeMillis() > _bulletReload + lastShot) {
-      shots.add(new Bullet(this, chrenchs, shapes));
-      lastShot = System.currentTimeMillis();
-    }
-  }
-
   // Finds the closest Chrench within a vision radius
   void targetClosest() {
     _target = null;
@@ -119,5 +114,41 @@ class AIChrench extends Chrench {
       }
     }
     return closestShape;
+  }
+
+  void levelUp() {
+    if (_points - _pointsUsed > 0) {
+      int rand = (int) random(6);
+      if (rand == 0 && _healthLevel < _maxLevel) {
+        _pointsUsed++;
+        _healthLevel++;
+        _healthRegen++;
+      }
+      if (rand == 1 && _bodyDLevel < _maxLevel) {
+        _pointsUsed++;
+        _bodyDLevel++;
+        _bodyDamage++;
+      }
+      if (rand == 2 && _bulletSLevel < _maxLevel) {
+        _pointsUsed++;
+        _bulletSLevel++;
+        _bulletSpeed++;
+      }
+      if (rand == 3 && _bulletDLevel < _maxLevel) {
+        _pointsUsed++;
+        _bulletDLevel++;
+        _bulletDamage++;
+      }
+      if (rand == 4 && _bulletRLevel < _maxLevel) {
+        _pointsUsed++;
+        _bulletRLevel++;
+        _bulletReload-=1;
+      }
+      if (rand == 5 && _speedLevel < _maxLevel) {
+        _pointsUsed++;
+        _speedLevel++;
+        speed+=.25;
+      }
+    }
   }
 }

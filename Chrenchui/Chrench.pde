@@ -6,11 +6,11 @@ abstract class Chrench implements Comparable {
   ArrayList<Shape> shapes;
   PShape tank, body, gun;
   float xPos, yPos, speed, heading;
-  boolean wP, aP, sP, dP, exists, shooting;
-  int level, _score, _health, _maxHealth, _bulletSpeed, _bulletDamage, _bulletReload, _points, _pointsUsed;
+  boolean shooting;
+  int _maxLevel, _score, _speedLevel, _health, _maxHealth, _healthLevel, _bulletSpeed, _bulletSLevel, _bulletDamage, _bulletDLevel, _bulletReload, _bulletRLevel, _points, _pointsUsed, _healthRegen, _healthRLevel, _bodyDamage, _bodyDLevel;
   color col;
   String _name;
-  double lastShot;
+  double lastShot = -500;
   double lastHit = System.currentTimeMillis();
   ConcurrentLinkedDeque<Bullet> shots;
 
@@ -25,7 +25,7 @@ abstract class Chrench implements Comparable {
 
   abstract void look();
 
-  abstract void shoot();
+  abstract void levelUp();
 
   void update() {
     look();
@@ -34,6 +34,8 @@ abstract class Chrench implements Comparable {
     shoot();
     display();
     updateBullets();
+    regenHealth();
+    levelUp();
   }
 
   void display() {
@@ -44,19 +46,37 @@ abstract class Chrench implements Comparable {
     text(_name + "\nHP: " + _health, xPos, yPos);
   }
 
+  void shoot() {
+    if (shooting && System.currentTimeMillis() > _bulletReload + lastShot) {
+      shots.add(new Bullet(this, chrenchs, shapes));
+      lastShot = System.currentTimeMillis();
+    }
+  }
+
   void doBodyDamage() {
     if (lastHit + 500 < System.currentTimeMillis()) {
       for (Chrench c : chrenchs) {
         if (c != this && dist(c.xPos, c.yPos, xPos, yPos) < 95) {
-          _health -= 5;
-          c._health -=5;
+          c._health -= _bodyDamage;
+          if (c._health <= 0) {
+            _score += c._score;
+            updatePoints();
+          }
           lastHit = System.currentTimeMillis();
         }
       }
       for (Shape s : shapes) {
-        if (dist(s.vertices.get(0).x, s.vertices.get(0).y, xPos, yPos) < 95) {
+        boolean touching = false;
+        for (PVector p : s.vertices)
+          if (dist(p.x, p.y, xPos, yPos) < 25)
+            touching = true;
+        if (touching) {
           _health -= 5;
-          s._health -=5;
+          s._health -= _bodyDamage;
+          if (s._health <= 0) {
+            updatePoints();
+            _score += s._score;
+          }
           lastHit = System.currentTimeMillis();
         }
       }
@@ -73,6 +93,13 @@ abstract class Chrench implements Comparable {
   }
 
   void updatePoints() {
-    _points = _score / 100 - _pointsUsed;
+    _points = _score / 100;
+  }
+
+  void regenHealth() {
+    if (frameCount % 60 == 0) {
+      if (_health + _healthRegen < _maxHealth) _health += _healthRegen;        
+      else _health = _maxHealth;
+    }
   }
 }

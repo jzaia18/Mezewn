@@ -30,6 +30,7 @@ class Pentagon extends Shape {
     s.setStroke(c);
     shape(s, 0, 0);
     fill(255);
+    textSize(12);
     text(_health + "", vertices.get(0).x, vertices.get(0).y);
   }
 }

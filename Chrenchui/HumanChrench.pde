@@ -1,6 +1,8 @@
 class HumanChrench extends Chrench {
 
-  HumanChrench(ArrayList<Chrench> c, ArrayList<Shape> s) {
+  boolean wP, aP, sP, dP, oneP, twoP, threeP, fourP, fiveP, sixP; 
+
+  HumanChrench(ArrayList<Chrench> c, ArrayList<Shape> s) { 
     shots = new ConcurrentLinkedDeque<Bullet>();
     lastShot = -500;
     xPos = random(50, width - 50);
@@ -20,22 +22,13 @@ class HumanChrench extends Chrench {
     gun.setStroke(col);
     heading = 0;
     _name = "Player";
-    exists = true;
     _score = 10;
     _health = _maxHealth = 100;
+    _healthRegen = 1;
     _bulletSpeed = 7;
-    _bulletDamage = 5;
+    _maxLevel = _bulletDamage = _bodyDamage = 5;
     _bulletReload = 250;
-    _points = 0;
-    _pointsUsed = 0;
-    }
-
-  void update() {
-    move();
-    look();
-    shoot();
-    display();
-    updateBullets();
+    _points = _pointsUsed = _speedLevel = _healthLevel = _bulletSLevel = _bulletDLevel = _bulletRLevel = _healthRLevel = _bodyDLevel = 0;
   }
 
   void move() {
@@ -78,13 +71,39 @@ class HumanChrench extends Chrench {
     tank.addChild(gun);
   }
 
-  void shoot() {
-    if (shooting && System.currentTimeMillis() > _bulletReload + lastShot) {
-      shots.add(new Bullet(this, chrenchs, shapes));
-      lastShot = System.currentTimeMillis();
+  void levelUp() {
+    if (_points - _pointsUsed > 0) {
+      if (oneP && _healthLevel < _maxLevel) {
+        _pointsUsed++;
+        _healthLevel++;
+        _healthRegen++;
+      }
+      if (twoP && _bodyDLevel < _maxLevel) {
+        _pointsUsed++;
+        _bodyDLevel++;
+        _bodyDamage++;
+      }
+      if (threeP && _bulletSLevel < _maxLevel) {
+        _pointsUsed++;
+        _bulletSLevel++;
+        _bulletSpeed++;
+      }
+      if (fourP && _bulletDLevel < _maxLevel) {
+        _pointsUsed++;
+        _bulletDLevel++;
+        _bulletDamage++;
+      }
+      if (fiveP && _bulletRLevel < _maxLevel) {
+        _pointsUsed++;
+        _bulletRLevel++;
+        _bulletReload-=10;
+      }
+      if (sixP && _speedLevel < _maxLevel) {
+        _pointsUsed++;        
+        _speedLevel++;
+        speed+=.25;
+      }
     }
+    oneP = twoP = threeP = fourP = fiveP = sixP = false;
   }
-
-
-
 }

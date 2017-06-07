@@ -21,16 +21,18 @@ class BadAIChrench extends Chrench {
     gun.setStroke(col);
     _name = "AI #" + num;
     heading = 0;
-    exists = true;
     _score = 10;
     _health = 100;
     _bulletSpeed = 7;
     _bulletReload = 250;
     _bulletDamage = 5;
+    shooting = true;
   }
 
   void move() {
-    //make it  
+  }
+  
+  void levelUp(){
   }
 
   void look() {
@@ -63,13 +65,6 @@ class BadAIChrench extends Chrench {
     gun.setFill(col);
     gun.setStroke(col);
     tank.addChild(gun);
-  }
-
-  void shoot() {
-    if (System.currentTimeMillis() > _bulletReload + lastShot) {
-      shots.add(new Bullet(this, chrenchs, shapes));
-      lastShot = System.currentTimeMillis();
-    }
   }
 
   // Finds the closest Chrench within a vision radius

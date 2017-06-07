@@ -46,7 +46,7 @@ class Bullet {
       if (touching) {
         exists = false;
         s._health -= _damage;
-        if (s._health == 0) {
+        if (s._health <= 0) {
           _parent._score += s._score;
           _parent.updatePoints();
         }
@@ -54,12 +54,12 @@ class Bullet {
     }
     for (Chrench c : chrenchs) {
       boolean touching = false;
-      if (dist(xPos, yPos, c.xPos, c.yPos) <= 35) {
+      if (dist(xPos, yPos, c.xPos, c.yPos) <= 25) {
         exists = false;
         if (c.lastHit + 500 < System.currentTimeMillis()) {
           c._health -= _damage;
           c.lastHit = System.currentTimeMillis();
-          if (c._health == 0) {
+          if (c._health <= 0) {
             _parent._score += c._score;
             _parent.updatePoints();
           }

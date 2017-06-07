@@ -1,7 +1,7 @@
 import java.util.Iterator;
 ArrayList<Chrench> chrenchs;
 ArrayList<Shape> shapes;
-Chrench player;
+HumanChrench player;
 int AINum;
 boolean respawn1, respawn2;
 
@@ -33,22 +33,33 @@ void draw() {
 
 // Used so that the user can move their Chrench
 void keyPressed() {
-  if (player.exists) {
+  if (player._health > 0) {
     if (Character.toLowerCase(key) == 'w') player.wP = true;
     if (Character.toLowerCase(key) == 'a') player.aP = true;
     if (Character.toLowerCase(key) == 's') player.sP = true;
     if (Character.toLowerCase(key) == 'd') player.dP = true;
+    if (key == '1') player.oneP = true;
+    if (key == '2') player.twoP = true;
+    if (key == '3') player.threeP = true;
+    if (key == '4') player.fourP = true;
+    if (key == '5') player.fiveP = true;
+    if (key == '6') player.sixP = true;
   }
 }
 
-
 // Alerts the Chrench to stop moving
 void keyReleased() {
-  if (player.exists) {
+  if (player._health > 0) {
     if (Character.toLowerCase(key) == 'w') player.wP = false;
     if (Character.toLowerCase(key) == 'a') player.aP = false;
     if (Character.toLowerCase(key) == 's') player.sP = false;
     if (Character.toLowerCase(key) == 'd') player.dP = false;
+    if (key == '1') player.oneP = false;
+    if (key == '2') player.twoP = false;
+    if (key == '3') player.threeP = false;
+    if (key == '4') player.fourP = false;
+    if (key == '5') player.fiveP = false;
+    if (key == '6') player.sixP = false;
   }
 }
 
@@ -57,6 +68,7 @@ void keyReleased() {
 void mousePressed() {
   if (player._health > 0) {
     player.shooting = true;
+    print(player.shooting);
   }
   // Otherwise check which button the player has pressed if they have pressed one
   else {
@@ -85,7 +97,7 @@ void mousePressed() {
 
 // Used to alert the Chrench to stop firing
 void mouseReleased() {
-  if (player.exists)
+  if (player._health > 0)
     player.shooting = false;
 }
 
@@ -93,11 +105,11 @@ void mouseReleased() {
 // Generate a small random shape
 Shape randShape() {
   int rand = (int) random(100);
-  if (rand < 30) return new Square();
-  else if (rand < 50) return new Triangle();
-  else if (rand < 70) return new Pentagon();
-  else if (rand < 80) return new Square(true);  
-  else if (rand < 95) return new Triangle(true);
+  if (rand < 80) return new Square();
+  else if (rand < 90) return new Triangle();
+  else if (rand < 95) return new Pentagon();
+  else if (rand < 97) return new Square(true);  
+  else if (rand < 98) return new Triangle(true);
   else return new Pentagon(true);
 }
 
@@ -145,12 +157,12 @@ void respawn() {
     text("Respawn", 125, height-65);
   }
   //respawns shapes
-  if (shapes.size() < 75){
+  if (shapes.size() < 75) {
     shapes.add(randShape());
   }
   //respawns AIs
-  if (chrenchs.size() < 10){
-    chrenchs.add(new AIChrench(chrenchs, shapes,AINum));
+  if (chrenchs.size() < 10) {
+    chrenchs.add(new AIChrench(chrenchs, shapes, AINum));
     AINum++;
   }
 }
@@ -163,10 +175,16 @@ void playerStats() {
   textSize(20);
   text("Player Stats", 125, height-115);
   textSize(12);
-  if (player.exists) {
+  if (player._health > 0) {
     text("Score: " + player._score, 125, height-95);
-    text("Points: " + player._points, 125, height-85);
-  } else text("Mass: 0", 125, height-95);
+    text("Points: " + (player._points - player._pointsUsed), 125, height-85);
+    text("Health Regen: Level " + player._healthLevel + "/" + player._maxLevel, 125, height-75);
+    text("Body Damage: Level " + player._bodyDLevel + "/" + player._maxLevel, 125, height-65);
+    text("Bullet Speed: Level " + player._bulletSLevel + "/" + player._maxLevel, 125, height-55);
+    text("Bullet Damage: Level " + player._bulletDLevel + "/" + player._maxLevel, 125, height-45);
+    text("Bullet Reload: Level " + player._bulletRLevel + "/" + player._maxLevel, 125, height-35);
+    text("Movement Speed: Level " + player._speedLevel + "/" + player._maxLevel, 125, height-25);
+  } else text("Score: 0", 125, height-95);
 }
 
 void shapeRemoval() {
